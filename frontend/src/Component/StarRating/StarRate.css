@@ -1,0 +1,10 @@
+input[type="radio"]{
+    display:none;
+}
+.star{
+    cursor:pointer;
+    font-size: 2rem;
+}
+.starRatelabel{
+    margin-top:2px;
+}

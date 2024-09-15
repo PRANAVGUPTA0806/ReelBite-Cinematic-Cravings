@@ -1,0 +1,100 @@
+.wrapper{
+    height:100vh;
+    width:100vw; 
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.movieContainer{
+    /* border: 1px solid blueviolet; */
+    /* height:100vh; */
+    /* width: 97vw; */
+    padding:10px;
+    background-color: #282929;
+    
+}
+.movieitemdiv{
+  margin:20px 20px;
+  /* border:1px solid orange; */
+  height:94%;
+  width:96%;
+  display:flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+   
+.movieCardCont{
+  /* border:1px solid purple; */
+  /* border:1px solid orange; */
+  height:600px;
+  width:350px;
+  margin-left:15px;
+  margin-right:15px;
+  margin-bottom:15px;
+  background-color: #292C34;
+  overflow-y: auto;
+}
+.movieCardImg{
+  
+  height:55%;
+  width:100%;
+  padding: 5px;
+}
+
+.movieCardCont span{
+  
+  color:lightgrey;
+  font-size:13px;
+  font-weight: 700;
+  margin-left:15px;
+  margin-bottom:20px;
+
+}
+.movieCardRate{
+  display: flex;
+}
+.movieCardRate span{
+  margin-top:5px;
+}
+
+
+.rrr{
+    background: var(--exDark);
+    color: black;
+    background-color: black;
+    text-align: center;
+    padding: 2rem 0;
+ 
+  }
+  .social-links3333{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.4rem;
+    background-color: black;
+  }
+  .social-links3333 a{
+    border: 2px solid #fff;
+    color: red;
+    display: block;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    text-decoration: none;
+    margin: 0 0.3rem;
+    transition: all 0.5s ease;
+  }
+  
+  .social-links3333 a:hover{
+    background: #e20707;
+    color: var(--exDark);
+  }
+  .rrr span{
+    margin-top: 1rem;
+    display: block;
+    color: var(--exDark);
+    font-family: var(--Playfair);
+    letter-spacing: 2px;
+  }

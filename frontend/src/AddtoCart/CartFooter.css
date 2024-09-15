@@ -1,0 +1,17 @@
+.cFWrapper{
+    height:20vh;
+    width:100%;
+    /* border:1px solid orange; */
+}
+.cFContainer{
+    display:flex;
+}
+.cFContainer button{
+    
+    margin-left: 20px;
+    margin-right:20px;
+    background-color: black;
+    border-radius: 2px;
+    color:white;
+    margin-top: 20px;
+}
