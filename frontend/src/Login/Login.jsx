@@ -32,11 +32,21 @@ const Login = () => {
 
       responseData = await response.json();
 
-      if (responseData.token) { // Check for successful login by token
+      if (responseData.token) {
+        // if(responseData.role === 'user'){ // Check for successful login by token
         localStorage.setItem('auth-token', responseData.token);
+        // }
         console.log("Login successful");
-        alert("You are logged in... WELCOME TO ... !!");
-        navigate('/home');
+        if (responseData.role === 'admin') {
+          console.log("Admin login successful");
+          alert("Welcome, Admin!");
+          window.location.href = 'http://localhost:5173/';// Redirect to admin panel
+        } else {
+          console.log("User login successful");
+          alert("You are logged in... WELCOME TO ... !!");
+          navigate('/home');
+        }
+  
       } else {
         console.log(responseData.error);
         alert("Login failed, please try again. " + responseData.error);

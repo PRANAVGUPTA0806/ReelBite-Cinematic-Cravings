@@ -6,7 +6,7 @@ const moviesSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    productImageUrl: {
+    image: {
       type: String,
       required: [true, "Please Add Product Image URL"],
     },

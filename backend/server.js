@@ -28,11 +28,10 @@ app.use('/images',express.static('Upload/images'))
 
 app.use('/upload',upload.single('product'),require('./routes/imageupload'))
 
-// Route for All Products - ShopByCategoryPage
-app.use("/api/allproducts", require("./routes/allProductsRoutes"));
+// Route for  Products
 
-// app.use("/api/moviesproducts", require("./routes/moviesRoutes"));
-// app.use("/api/foodproducts", require("./routes/foodRoutes"));
+app.use("/api/moviesproducts", require("./routes/moviesRoutes"));
+app.use("/api/foodproducts", require("./routes/foodRoutes"));
 
 // Route for User Registration and Authentication
 app.use("/api/user", require("./routes/userRoutes"));

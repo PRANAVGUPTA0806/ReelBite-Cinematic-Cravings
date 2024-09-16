@@ -39,7 +39,7 @@
     "nodemon": "^3.1.4",
     "vite": "^5.2.0"
   },
-  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "description": "ReelBite Frontend",
   "main": "vite.config.js",
   "author": "Pranav Gupta",
   "license": "ISC"
