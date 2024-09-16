@@ -8,13 +8,14 @@ const {
   getProductsById,
   updateProductsById,
   deleteProductsById,
-} = require("../controllers/allProductsController");
+} = require("../controllers/moviesController");
 
-router.route("/").get(getProducts).post(createProducts);
-router
-  .route(":/id")
-  .get(getProductsById)
-  .put(updateProductsById)
-  .delete(deleteProductsById);
+router.get("/all", getProducts);
+router.post("/", createProducts);
+
+// Route for getting, updating, and deleting a product by ID
+router.get("/", getProductsById);
+router.put("/edit", updateProductsById);
+router.delete("/del", deleteProductsById);
 
 module.exports = router;

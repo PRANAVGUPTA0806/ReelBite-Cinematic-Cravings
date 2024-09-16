@@ -71,12 +71,19 @@ const loginUser = asyncHandler(async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
+    let role1;
+    if (user.isAdmin){
+      role1='admin'
+    }else {
+      role1='user'
+    }
 
     res.json({
       _id: user._id,
       username: user.username,
       email: user.email,
       token,
+      role:role1
     });
   }else{
     res.status(400).json({success:false,error:"Wrong Password"})
