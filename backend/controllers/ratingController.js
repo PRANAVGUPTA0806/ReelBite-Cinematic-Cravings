@@ -1,6 +1,25 @@
 const asyncHandler = require('express-async-handler');
 const Rating = require('../models/ratingModel');
 
+
+// @desc    Get user rating for a product
+// @route   GET /api/rating/:userId/:productId
+// @access  Public
+const getUserRating = asyncHandler(async (req, res) => {
+    const { userId, productId } = req.params;
+
+    const rating = await Rating.findOne({ userId, productId });
+
+    if (!rating) {
+        return res.status(404).json({ success: false, message: 'No rating found for this user and product' });
+    }
+
+    res.status(200).json({
+        success: true,
+        rating: rating.rating, // Send the user's rating
+    });
+});
+
 // @desc    Save user rating
 // @route   POST /api/rating/save-rating
 // @access  Public
@@ -28,5 +47,5 @@ const saveRating = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-    saveRating,
+    saveRating,getUserRating,
 };

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './AddProduct.css'
 import upload_area from '../../assets/upload_area.svg'
 
+
 const AddFoodProduct = () => {
   const [image,setImage]=useState(false);
   const [productDetails,setProductDetails]=useState({
@@ -24,11 +25,18 @@ const AddFoodProduct = () => {
 
     let formData=new FormData();
     formData.append('product',image);
+    const token = localStorage.getItem('auth-token'); // Retrieve the token
+    
+        if (!token) {
+            console.error('No token found in localStorage');
+            return;
+        }
 
     await fetch('http://localhost:8000/upload/image',{
         method:'POST',
         headers:{
             Accept:'application/json',
+            
         },
         body:formData,
     }).then((resp)=>resp.json()).then((data)=>{responseData=data})
@@ -41,7 +49,8 @@ const AddFoodProduct = () => {
                 method:'POST',
                 headers:{
                     Accept:'application/json',
-                    'Content-Type':'application/json',
+                    "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
                 },
                 body:JSON.stringify(product),
             }
@@ -58,6 +67,7 @@ const AddFoodProduct = () => {
 }
   return (
     <div className='add-product'>
+      <h1>Add Food Items</h1>
       <div className="addproduct-itemfield">
         <p>Product Title</p>
         <input type="text" value={productDetails.productName} onChange={changeHandler} name='productName' placeholder='Type product name here ' />

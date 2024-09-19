@@ -10,14 +10,18 @@ const Login = () => {
     email: "",
     password: ""
   });
+  const [resetEmail, setResetEmail] = useState("");
 
   const changeHandle = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleResetEmailChange = (e) => {
+    setResetEmail(e.target.value);
+  };
+
   const login = async (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
-    console.log("Login function executed", formData);
     let responseData;
 
     try {
@@ -33,9 +37,9 @@ const Login = () => {
       responseData = await response.json();
 
       if (responseData.token) {
-        // if(responseData.role === 'user'){ // Check for successful login by token
+        
         localStorage.setItem('auth-token', responseData.token);
-        // }
+
         console.log("Login successful");
         if (responseData.role === 'admin') {
           console.log("Admin login successful");
@@ -57,15 +61,45 @@ const Login = () => {
       alert("An error occurred during login.");
     }
   };
+  const requestPasswordReset = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch('http://localhost:8000/api/user/forgot-password', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: resetEmail }),
+      });
+
+      const responseData = await response.json();
+
+      if (responseData.success) {
+        alert("Password reset link sent to your email.");
+        navigate('/sign');
+        setLostPasswordFormVisible(false);
+      } else {
+        alert("Failed to send password reset link. " + responseData.error);
+      }
+    } catch (error) {
+      console.error("Error during password reset request:", error);
+      alert("An error occurred while requesting password reset.");
+    }
+  };
 
   const toggleForm = (formType) => {
-    setLoginFormVisible(formType === 'signin');
+    setLoginFormVisible(formType === 'login');
     setLostPasswordFormVisible(formType === 'lostPassword');
   };
 
   return (
-    <section className='w2'>
-      <div className="form-container">
+    <div className='w2'>
+      <div className="login-page1">
+      <div className="box1">
+      <div className="form1">
+        
         <h1>Login</h1>
         <form 
           className={isLoginFormVisible ? 'login-form' : 'login-form form-hidden'} 
@@ -96,14 +130,40 @@ const Login = () => {
           <span><input type="checkbox" /> Remember me</span>
           <div className="control">
             <button type="submit" className="btn">Login</button>
-          </div>
-        </form>
+          
+        </div>
         <p>
-          <Link to='/sign' onClick={() => toggleForm('signin')}>Sign Up</Link> | 
-          <a href="/sign#" onClick={() => toggleForm('lostPassword')}>Lost Your Password?</a>
+          <Link to='/sign' onClick={() => toggleForm('login')}>Sign Up</Link> | 
+          <a href="#" onClick={() => toggleForm('lostPassword')}>Lost Your Password?</a>
         </p>
+        </form>
+       
+        {/* Lost Password Form */}
+        <form 
+              className={isLostPasswordFormVisible ? 'lost-password-form' : 'lost-password-form form-hidden'} 
+              onSubmit={requestPasswordReset}
+            >
+              <h3>Lost Your Password?</h3>
+              <h5>You will receive a link to create a new password via email.</h5>
+              <div className="form-group">
+                <input 
+                  type="email" 
+                  placeholder="Email Address*" 
+                  className="form-control" 
+                  value={resetEmail} 
+                  onChange={handleResetEmailChange} 
+                  required 
+                />
+              </div>
+              <button type="submit" className="submit-btn">Reset</button>
+              <p>
+                <Link to='/login' className="login-btn" onClick={() => toggleForm('login')}>Log in</Link>
+              </p>
+            </form>
       </div>
-    </section>
+      </div>
+    </div>
+    </div>
   );
 }
 

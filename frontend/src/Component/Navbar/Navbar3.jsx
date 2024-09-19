@@ -2,18 +2,46 @@ import React, { useState, useEffect ,useContext} from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import './Navbar3.css'
-import { MovieContext } from '../../Context/MovieContext';
 import bg1 from '/pp1.png';
-import { listitem } from "../../Data";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass,faCartShopping } from '@fortawesome/free-solid-svg-icons'
-const Navbar = ()=>{
+const Navbar3 = ({quantityAdded})=>{
     
     const navigate = useNavigate();
     const handleCart = ()=>{
         navigate('/addcart')
     }
-    const {itema,item} = useContext(MovieContext)
+    const [total1, setTotal] = useState(0);
+    const [errorMessage, setErrorMessage] = useState('');
+    useEffect(() => {
+        const fetchMovieCartItems = async () => {
+          const token = localStorage.getItem('auth-token'); // Retrieve the token
+    
+      if (!token) {
+        console.log('No token found in localStorage');
+        return;
+      }
+            try {
+                const response = await fetch('http://localhost:8000/api/cart/',{
+                  method:'GET',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}` // Set the Authorization header
+                  }
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                
+                setTotal(data.totalQuantity)
+            } catch (error) {
+                setErrorMessage('Failed to load  cart items: ' + error.message);
+            }
+        };
+    
+        fetchMovieCartItems();
+    }, [quantityAdded]);
     return(
         <>
         <div className="Navwrapper">
@@ -46,7 +74,9 @@ const Navbar = ()=>{
                         
                  
                     </div>
-                    <div className='basket'>{localStorage.getItem('auth-token')?(itema+item):0}</div>
+                    <div className='basket'>{total1}</div>
+                    
+                    
                     {localStorage.getItem('auth-token')?<button  id="btn1" onClick={()=>{localStorage.removeItem('auth-token');window.location.replace('/addcart')}}>Logout</button>
           :<Link  style={{ textDecoration: "None" }} id="btn1" className="btn btn-full" to='/login'>Log In</Link>}
                 </div>
@@ -56,4 +86,4 @@ const Navbar = ()=>{
     )
 }
 
-export default Navbar;
+export default Navbar3;

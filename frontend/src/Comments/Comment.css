@@ -1,6 +1,4 @@
-
-  
-  .s {
+.s {
     margin-bottom: 20px;
   }
   
@@ -24,6 +22,9 @@
     list-style-type: none;
     padding: 0;
   }
+  .n p{
+    color:white;
+  }
   
   li {
     margin-bottom: 10px;
@@ -35,7 +36,6 @@
     background-color: #ff6347;
     color: white;
     border-radius: 4%;
-    /* border: none; */
     cursor: pointer;
   }
   

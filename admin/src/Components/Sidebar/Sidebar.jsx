@@ -7,30 +7,36 @@ import list_product_icon from '../../assets/Product_list_icon.svg'
 const Sidebar = () => {
   return (
     <div className='sidebar'>
-      <Link to={'/addmovieproduct'} style={{textDecoration:"none"}}>
+      <Link to={'/admin/addmovieproduct'} style={{textDecoration:"none"}}>
       <div className="sidebar-item">
         <img src={add_product_icon} alt="" />
       <p>Add Movie Product</p>
       </div>
       </Link>
-      <Link to={'/addfoodproduct'} style={{textDecoration:"none"}}>
+      <Link to={'/admin/addfoodproduct'} style={{textDecoration:"none"}}>
       <div className="sidebar-item">
         <img src={add_product_icon} alt="" />
       <p>Add Food Product</p>
       </div>
       </Link>
-      <Link to={'/movieproduct'} style={{textDecoration:"none"}}>
+      <Link to={'/admin/movieproduct'} style={{textDecoration:"none"}}>
       <div className="sidebar-item">
         <img src={list_product_icon} alt="" />
       <p>Movies Product List</p>
       </div>
       </Link> 
-      <Link to={'/foodproduct'} style={{textDecoration:"none"}}>
+      <Link to={'/admin/foodproduct'} style={{textDecoration:"none"}}>
       <div className="sidebar-item">
         <img src={list_product_icon} alt="" />
       <p>Food Product List</p>
       </div>
       </Link> 
+      <Link to={'/admin/allorders'} style={{textDecoration:"none"}}>
+      <div className="sidebar-item">
+        <img src={list_product_icon} alt="" />
+      <p>All Orders List</p>
+      </div>
+      </Link>
     </div>
   )
 }

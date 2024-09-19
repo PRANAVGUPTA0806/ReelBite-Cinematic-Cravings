@@ -1,6 +1,8 @@
 .admin{
     display:flex;
     background-image: url(./main.jpg);
+    min-height: 100vh;
+    min-width:200vh
 }
 
 @media(max-width:800px) {

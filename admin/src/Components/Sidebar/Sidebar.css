@@ -5,9 +5,10 @@
     gap: 20px;
     width: 100%;
     max-width: 250px;
-    height: 100vh;
+    /* min-height: 100vh; */
     background:#05204A;
-
+    overflow-y: auto;
+    overflow-x: auto;
 }
 
 .sidebar-item{

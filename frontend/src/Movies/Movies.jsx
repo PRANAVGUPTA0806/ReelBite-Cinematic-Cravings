@@ -23,11 +23,25 @@ function Footer134() {
   );
 }
 const Movies = () => {
-  const {addToCart, CartItems,handleItem,item} = useContext(MovieContext)
-  
+  // const {addToCart, CartItems,handleItem,item} = useContext(MovieContext)
+  const [movieItems, setMovieItems] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(''); 
   const [exitIntent, setExitIntent] = useState(false);
+  const[quantityAdd,setQuantityAdd] = useState(false);
 
   useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/api/moviesproducts/all');
+        const data = await response.json();
+        setMovieItems(data); // Store fetched movie data in state
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      }
+    };
+
+    fetchMovies();
+
     const handleMouseLeave = () => {
       setExitIntent(true);
     };
@@ -50,36 +64,57 @@ const Movies = () => {
   const handleClosePopup = () => {
     document.getElementById('exit-popup11').style.display = 'none';
   };
+  const filteredMovies = movieItems.filter((movie) =>
+    movie.productName.toLowerCase().includes(searchTerm)
+  );
+  const addToCart = async (productId, quantity = 1) => {
+    setQuantityAdd(false);
+    try {
+      const response = await fetch('http://localhost:8000/api/cart/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('auth-token')}` // Add auth token if user is logged in
+        },
+        body: JSON.stringify({ productId, quantity })
+      });
 
+      if (!response.ok) {
+        throw new Error('Failed to add item to cart');
+      }
+
+      const data = await response.json();
+      setQuantityAdd(true);
+      alert('Movie added to cart successfully!');
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+      alert('Failed to add movie to cart:Login/Signup first');
+    }
+    
+  };
+  
   return (
     <>
       <div className='wrapper'>
-        <Navbar />
+        <Navbar setSearchTerm={setSearchTerm} quantityAdded = {quantityAdd} />
         <div className='movieContainer'>
           <div className='movieitemdiv'>
-            
-              {movieitems.map((data , index)=>{
-                
-                
-                return(
-                 
-                  <>
-                  <div className='movieCardCont'>
-              <img className='movieCardImg' src={data.img}/>
-              <div
-                className='movieCardRate'
-              > <span >{data.name}</span>
-                  <StarRate />
+          {filteredMovies.length > 0 ? (
+            filteredMovies.map((data, index) => (
+              <div key={index} className='movieCardCont'>
+                <img className='movieCardImg' src={data.image} alt={data.name} />
+                <div className='movieCardRate'>
+                  <span>{data.productName}</span>
+                  <StarRate userId={data._id} productId={data._id}/>
+                </div>
+                <span>{data.category}</span><br />
+                <span>${data.productPrice}</span>
+                <button className='com' onClick={() => addToCart(data._id)}>Buy Tickets</button>
+                <Comment productId={data._id} />
               </div>
-              <span >{data.genre}</span><br/>
-              <span>${data.price}</span> <button className='com' onClick={()=>addToCart(data.id)}>Buy Tickets</button>
-              
-              <Comment/>
-            </div>
-                  </>
-                )
-              
-              })}
+            ))
+          ) : (
+            <div className='no'><h3>No products found.</h3></div>)}
           </div>
         </div>
         <Footer134/>

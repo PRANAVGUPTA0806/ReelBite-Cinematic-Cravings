@@ -24,6 +24,106 @@ function AddtoCart() {
       </footer>
     );
   }
+  const [movieCartItems, setMovieCartItems] = useState([]);
+  const [foodCartItems, setFoodCartItems] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [total1, setTotal] = useState(0);
+  const[quantityAdd,setQuantityAdd] = useState(false);
+  const[cartdata,setCartdata]=useState([]);
+
+  // Fetch movie cart items from the backend
+  useEffect(() => {
+    const fetchMovieCartItems = async () => {
+      const token = localStorage.getItem('auth-token'); // Retrieve the token
+
+  if (!token) {
+    console.log('No token found in localStorage');
+    return;
+  }
+        try {
+            const response = await fetch('http://localhost:8000/api/cart/',{
+              method:'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}` // Set the Authorization header
+              }
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            setMovieCartItems(data.items || []);
+            setCartdata(data);
+            
+            setTotal(data.totalPrice)
+        } catch (error) {
+            setErrorMessage('Failed to load  cart items: ' + error.message);
+        }
+    };
+
+    fetchMovieCartItems();
+}, []);
+
+const handleAddQuantity = async (productId) => {
+  setQuantityAdd(false);
+  const token = localStorage.getItem('auth-token');
+  try {
+    const response = await fetch('http://localhost:8000/api/cart/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ productId, quantity: 1 }),
+    });
+    const updatedCart = await response.json();
+    setQuantityAdd(true);
+    setMovieCartItems(updatedCart.items);
+    setTotal(updatedCart.totalPrice);
+  } catch (error) {
+    setErrorMessage('Error updating cart: ' + error.message);
+  }
+};
+
+const handleRemoveQuantity = async (productId) => {
+  setQuantityAdd(false);
+  const token = localStorage.getItem('auth-token');
+  try {
+    const response = await fetch('http://localhost:8000/api/cart/remove', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ productId, quantity: 1 }),
+    });
+    const updatedCart = await response.json();
+    setMovieCartItems(updatedCart.items);
+    setQuantityAdd(true);
+    setTotal(updatedCart.totalPrice);
+  } catch (error) {
+    setErrorMessage('Error updating cart: ' + error.message);
+  }
+};
+const handledeleteQuantity = async (productId) => {
+  const token = localStorage.getItem('auth-token');
+  try {
+    const response = await fetch('http://localhost:8000/api/cart/remove1', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ productId}),
+    });
+    const updatedCart = await response.json();
+    setMovieCartItems(updatedCart.items);
+    setTotal(updatedCart.totalPrice);
+  } catch (error) {
+    setErrorMessage('Error updating cart: ' + error.message);
+  }
+};
+ 
   const [exitIntent, setExitIntent] = useState(false);
 
   useEffect(() => {
@@ -53,7 +153,7 @@ function AddtoCart() {
   return (
     
     <div className='cartWrapper'>
-        <Navbar/>
+        <Navbar quantityAdded = {quantityAdd}/>
         <div className='cartContainer' >
     
           <div className='CartLeft'>
@@ -68,42 +168,25 @@ function AddtoCart() {
               <h3>TOTAL</h3>
               </div>
             </div>
+            {movieCartItems.length > 0 ? (
+                    movieCartItems.map(item => (
+                        <CartItem
+                            key={item.productId}
+                            item={item}
+                            onAdd={handleAddQuantity}
+                            onRemove={handleRemoveQuantity}
+                            ondelete={handledeleteQuantity}
+                        />
+                    ))
+                ) : (
+                    <p>No items in the movie cart</p>
+                )}
             
-            {movieitems.map((data)=>{
-               if(cartItems[data.id]!==0){
-                
-                return <CartItem data={data}/>
-                
-               }
-               
-            })}
-          </div>
-
-          <div className='CartRight'>
-             <div className='cartHeader'>
-              <div className='headerLeft'>
-                  <h3>PRODUCT</h3>
-              </div>
-              <div className='headerRight'>
-              <h3>PRICE</h3>
-              <h3>QUANTITY</h3>
-              <h3>TOTAL</h3>
-              </div>
-            </div>
-           
-            {fooditems.map((data,index)=>{
-               if(cartItem[data.id]!==0){
-                
-                return <CartItem1 data1={data} key={index}/>
-                
-               }
-               
-            })}
           </div>
         
         </div>
 
-          <CartFooter/>
+          <CartFooter  total={total1} cartItems={cartdata}/>
 
         <Footer13431/>
         <div id="exit-popup1121" style={{ display: 'none' }} >

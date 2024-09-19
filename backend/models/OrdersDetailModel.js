@@ -13,50 +13,35 @@ const OrderSchema = new mongoose.Schema(
     order_summary: {
       items: [
         {
-          product_id: { type: String, required: true },
+          productId: { type: String, required: true },
           productImageUrl: { type: String },
           productName: { type: String, required: true },
           quantity: { type: Number, required: true },
-          productPrice: { type: Number, required: true },
+          price: { type: Number, required: true },
           productDescription: { type: String },
         },
       ],
-      total_price: {
+      totalPrice: {
         type: Number,
         required: true
       },
-      total_tax: {
-        type: Number,
-        required: true,
-        default: 0 
-      },
-      shipping_fee: {
-        type: Number,
-        required: true,
-        default: 0
-      },
+      
+     
       order_date: {
         type: Date,
         default: Date.now
       },
-      discount: {
-        type: Number,
-        default: 0
-      },
-      final_price: {  
+      
+      totalPrice: {  
         type: Number,
         required: true
-      },
-      status: {
-        type: String,
-        enum: ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled', 'Refunded'],
-        default: 'Pending'
       },
       payment_status: {
         type: String,
         enum: ['Pending', 'Paid', 'Failed', 'Refunded'],
-        default: 'Pending'
+        default: 'Paid'
       },
+      
       // Payment History for complex payment handling
       payment_history: [
         {
@@ -65,7 +50,7 @@ const OrderSchema = new mongoose.Schema(
           payment_status: {
             type: String,
             enum: ['Pending', 'Paid', 'Failed'],
-            required: true
+            // required: true
           },
           payment_date: {
             type: Date,
@@ -74,49 +59,11 @@ const OrderSchema = new mongoose.Schema(
         }
       ]
     },
-    // Billing Information
-    billing_information: {
-      billing_address: {
-        addressLine1: { type: String , required: true},
-        addressLine2: { type: String },
-        city: { type: String, required: true },
-        state: { type: String, required: true },
-        zip: { type: String, required: true },
-        country: { type: String, required: true },
-        phone: { type: String, required: true } // Optionally add phone number to billing
-      },
-
-      email: { type: String, required: true },
-      payment_method: { type: String,default:'' },
-      transaction_id: { type: String,default:'' }
-    },
-    // Shipping Information
-    shipping_information: {
-      shipping_address: {
-        addressLine1: { type: String, required: true },
-        addressLine2: { type: String },
-        city: { type: String, required: true },
-        state: { type: String, required: true },
-        zip: { type: String, required: true },
-        country: { type: String, required: true },
-        phone: { type: String, required: true }
-      },
-      shipping_method: {
-        type: String,
-        enum: ['','Standard Shipping', 'Express Shipping', 'Next-Day Shipping'],
-        default:"",
-      },
-      tracking_number: { type: String }, // Add this once available from the carrier
-      estimated_delivery_date: { type: Date }
-    },
-    // Order History for tracking status changes over time
+    payment_method: { type: String },
+    transaction_id: { type: String },
     order_history: [
       {
-        status: {
-          type: String,
-          enum: ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled', 'Refunded'],
-          default:'Pending',
-        },
+        
         updated_at: {
           type: Date,
           default: Date.now
@@ -124,16 +71,7 @@ const OrderSchema = new mongoose.Schema(
         remarks: { type: String,default:'' } // Optional remarks explaining status change
       }
     ],
-    // Refund Information
-    refund_information: {
-      refund_status: {
-        type: String,
-        enum: ['None', 'Requested', 'Processed', 'Rejected'],
-        default: 'None'
-      },
-      refund_amount: { type: Number,default:'' },
-      refund_date: { type: Date,default: Date.now}
-    },
+   
     timestamps: {
       created_at: { type: Date, default: Date.now },
       updated_at: { type: Date, default: Date.now }

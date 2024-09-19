@@ -68,9 +68,6 @@ export const MovieContextProvider = (props)=>{
 
     const contextValue = {addToCart, removeFromCart,itema,item,cartItems,getToCartDefault,addToFoodCart,removeFromFoodCart,cartItem,getToCartDefault1,setCartItem,setCartItems}
 
-    console.log("cartItem on click", cartItems)
-    console.log("FoodItem on click", cartItem)
-   
     return(
         <>
         <MovieContext.Provider value={contextValue}>

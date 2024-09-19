@@ -5,11 +5,12 @@ import navlogo from '/pp1.png'
 import navprofile from '../../assets/nav-profile.svg'
 
 const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <div className='navbar'>
-      <img src={navlogo} alt="logo" className="nav-logo" />
-      {<button  id="btn1" onClick={()=>{window.location.href = 'http://localhost:5174/home';}}>Logout</button>
-          }
+      <Link to='/home'><img src={navlogo} alt="logo" className="nav-logo" /></Link>
+          {localStorage.getItem('auth-token')?<button  id="btn2" onClick={()=>{localStorage.removeItem('auth-token');navigate('/')}}>Logout</button>
+          :<Link  style={{ textDecoration: "None" }} id="btn2" className="btn btn-full" to='/login'>Log In</Link>}
       <img src={navprofile} alt="logo" className="nav-profile" />
     </div>
   )

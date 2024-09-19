@@ -50,7 +50,9 @@
     margin: 10px 0px;
 
 }
-
+.add-product h1{
+    color:black;
+}
 .addproduct-btn{
     margin-top: 20px;
     width: 160px;
