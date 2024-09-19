@@ -39,6 +39,7 @@ const CartFooter = ({ total ,cartItems}) => {
                 },
                 body: JSON.stringify({
                     order_summary: cartItems,
+                    transaction_id:"na",
                     payment_method: "CASH", // Include order summary
                     // Add other necessary fields here, e.g., billing_information, shipping_information
                 }),

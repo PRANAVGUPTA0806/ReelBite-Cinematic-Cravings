@@ -38,6 +38,7 @@
 }
 .listproduct-allproducts{
     overflow-y: auto;
+    overflow-x: auto;
 }
 
 @media(max-width:800px)
