@@ -8,7 +8,7 @@ const {
 } = require('../controllers/commentControllers');
 
 // Route to get all tasks
-router.get('/tasks', getcomment);
+router.get('/tasks/:productId', getcomment);
 
 // Route to add a new task
 router.post('/add', addcomment);

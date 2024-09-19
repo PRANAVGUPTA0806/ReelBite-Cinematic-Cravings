@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import './StarRate.css';
 
 const StarRate = ({ userId, productId }) => {
@@ -6,20 +6,34 @@ const StarRate = ({ userId, productId }) => {
   const [hover, setHover] = useState(null);
   const [totalStars] = useState(5); // Assuming 5 stars
 
+  const fetchUserRating = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/api/rating/rating/${userId}/${productId}`);
+      const data = await response.json();
+
+      if (data.success) {
+        setRating(data.rating); // Set the rating if found
+      }
+    } catch (error) {
+      console.error('Error fetching user rating:', error);
+    }
+  };
+
   // Function to save the rating using fetch
   const saveRating = async (currentRating) => {
     try {
-      const response = await fetch('/api/rating/save-rating', {
+      const response = await fetch('http://localhost:8000/api/rating/save-rating', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          userId: "66e5a72521007df183c9674d",
-        //   productId: productId,
+          userId: userId,
+          productId: productId,
           rating: currentRating,
         }),
       });
+
 
       const data = await response.json();
 
@@ -32,6 +46,10 @@ const StarRate = ({ userId, productId }) => {
       console.error('Error occurred while saving rating:', error);
     }
   };
+
+  useEffect(() => {
+    fetchUserRating();
+  }, []);
 
   return (
     <>

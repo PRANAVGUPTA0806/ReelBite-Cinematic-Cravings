@@ -3,15 +3,19 @@ import AddTodo from './AddTodo'
 import Todo from './Todo'
 import './Comment.css'
 
-const Comment=()=> {
+const Comment=({productId })=> {
   const [todos, setTodos] = useState([]);
 
   const fetchTasks = async () => {
-          const response = await fetch('http://localhost:8000/tasks');
+          const response = await fetch(`http://localhost:8000/tasks/${productId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
           const data = await response.json();
           setTodos(data);
   };
-
   useEffect(() => {
       fetchTasks();
   }, []);
@@ -22,13 +26,13 @@ const Comment=()=> {
               headers: {
                   'Content-Type': 'application/json',
               },
-              body: JSON.stringify({ text }),
+              body: JSON.stringify({ text ,productId}),
           });
 
           if (response.ok) {
               fetchTasks();
           } else {
-              console.error('Failed to add task');
+              console.error('Failed to add comment');
           }
   };
 
@@ -38,13 +42,13 @@ const Comment=()=> {
               headers: {
                   'Content-Type': 'application/json',
               },
-              body: JSON.stringify({ id: todo.id }),
+              body: JSON.stringify({ id: todo.id ,productId}),
           });
 
           if (response.ok) {
               fetchTasks();
           } else {
-              console.error('Failed to delete task');
+              console.error('Failed to delete comment');
           }
   };
 
@@ -54,13 +58,13 @@ const Comment=()=> {
               headers: {
                   'Content-Type': 'application/json',
               },
-              body: JSON.stringify({ id: todo.id, text: todo.text }),
+              body: JSON.stringify({ id: todo.id, text: todo.text,productId }),
           });
 
           if (response.ok) {
               fetchTasks();
           } else {
-              console.error('Failed to update task');
+              console.error('Failed to update comment');
           }
   };
 

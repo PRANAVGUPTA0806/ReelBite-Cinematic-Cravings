@@ -4,7 +4,7 @@ const orderController = require('../controllers/OrdersDetailsControllers.js');
 const { isAdmin, protect } = require('../middleware/authMiddleware.js');
 
 // Route to create a new order
-router.post('/orders', protect, orderController.createOrder);
+router.post('/orders',protect, orderController.createOrder);
 
 // Route to get all orders (Admin only)
 router.get('/admin/orders', isAdmin, orderController.getAllOrders);

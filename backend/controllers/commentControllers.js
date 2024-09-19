@@ -5,7 +5,7 @@ const Todo = require('../models/commentModel'); // Adjust the path as necessary
 // @route   GET /tasks
 const getcomment = async (req, res) => {
   try {
-    const tasks = await Todo.find();
+    const tasks = await Todo.find({ productId: req.params.productId }); // Use req.params for productId
     res.json(tasks);
   } catch (error) {
     res.status(500).json({ success: false, error: 'Server Error' });
@@ -28,12 +28,13 @@ const addcomment = async (req, res) => {
     const newTodo = new Todo({
       id: id,
       text: req.body.text,
+      productId:req.body.productId,
     });
 
     await newTodo.save();
     res.status(200).json({
       success: true,
-      message: 'Todo added successfully',
+      message: 'comment added successfully',
       todo: newTodo,
     });
   } catch (error) {
@@ -46,7 +47,7 @@ const addcomment = async (req, res) => {
 const updatecomment = async (req, res) => {
   try {
     const updatedTodo = await Todo.findOneAndUpdate(
-      { id: req.body.id },
+      { id: req.body.id, productId: req.body.productId }, // Include productId in the filter
       { text: req.body.text },
       { new: true }
     );
@@ -54,11 +55,11 @@ const updatecomment = async (req, res) => {
     if (updatedTodo) {
       res.status(200).json({
         success: true,
-        message: 'Todo updated successfully',
+        message: 'Comment updated successfully',
         todo: updatedTodo,
       });
     } else {
-      res.status(404).json({ success: false, error: 'Todo not found' });
+      res.status(404).json({ success: false, error: 'Comment not found' });
     }
   } catch (error) {
     res.status(500).json({ success: false, error: 'Server Error' });
@@ -69,16 +70,16 @@ const updatecomment = async (req, res) => {
 // @route   DELETE /delete
 const deletecomment = async (req, res) => {
   try {
-    const deletedTodo = await Todo.findOneAndDelete({ id: req.body.id });
+    const deletedTodo = await Todo.findOneAndDelete({ productId:req.body.productId,id: req.body.id });
 
     if (deletedTodo) {
       res.status(200).json({
         success: true,
-        message: 'Todo deleted successfully',
+        message: 'comment deleted successfully',
         todo: deletedTodo,
       });
     } else {
-      res.status(404).json({ success: false, error: 'Todo not found' });
+      res.status(404).json({ success: false, error: 'comment not found' });
     }
   } catch (error) {
     res.status(500).json({ success: false, error: 'Server Error' });

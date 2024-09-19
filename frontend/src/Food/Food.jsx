@@ -22,12 +22,28 @@ function Footer1343() {
       </footer>
     );
   }
-const Movies = ()=>{
-  const {addToFoodCart, CartItems} = useContext(MovieContext)
+const Food = ()=>{
+  // const {addToFoodCart, CartItems} = useContext(MovieContext)
+  const [movieItems, setMovieItems] = useState([]);
+  const [exitIntent, setExitIntent] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(''); 
+  const[quantityAdd,setQuantityAdd] = useState(false);
 
-    const [exitIntent, setExitIntent] = useState(false);
 
   useEffect(() => {
+
+    const fetchMovies = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/api/foodproducts/all');
+        const data = await response.json();
+        setMovieItems(data); // Store fetched movie data in state
+      } catch (error) {
+        console.error('Error fetching food items:', error);
+      }
+    };
+
+    fetchMovies();
+
     const handleMouseLeave = () => {
       setExitIntent(true);
     };
@@ -50,30 +66,56 @@ const Movies = ()=>{
   const handleClosePopup = () => {
     document.getElementById('exit-popup111').style.display = 'none';
   };
+  const filteredMovies = movieItems.filter((movie) =>
+    movie.productName.toLowerCase().includes(searchTerm)
+  );
+  const addToCart = async (productId, quantity = 1) => {
+    setQuantityAdd(false);
+    try {
+      const response = await fetch('http://localhost:8000/api/cart/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('auth-token')}` // Add auth token if user is logged in
+        },
+        body: JSON.stringify({ productId, quantity })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add item to cart');
+      }
+
+      const data = await response.json();
+      setQuantityAdd(true);
+      alert('Food item added to cart successfully!');
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+      alert('Failed to add Food to cart:Login/Signup first');
+    }
+  };
 
     return(
         <>
         <div className='wrapper'>
-            <Navbar1/>
+            <Navbar1 setSearchTerm={setSearchTerm} quantityAdded = {quantityAdd}/>
             <div className='movieContainer'>
           <div className='movieitemdiv'>
-            
-              {fooditems.map((data)=>{
-                return(
-                  <>
-                  <div className='movieCardCont'>
-              <img className='movieCardImg' src={data.img}/>
-              <div
-                className='movieCardRate'
-              > <span >{data.name}</span>
-                  <StarRate/>
+          {filteredMovies.length > 0 ? (
+            filteredMovies.map((data, index) => (
+              <div key={index} className='movieCardCont'>
+                <img className='movieCardImg' src={data.image} alt={data.name} />
+                <div className='movieCardRate'>
+                  <span>{data.productName}</span>
+                  <StarRate userId={data._id} productId={data._id} />
+                </div>
+                {/* <span>{data.category}</span><br /> */}
+                <span>${data.productPrice}</span>
+                <button className='com' onClick={() => addToCart(data._id)}>Buy Food</button>
+                <Comment productId={data._id}/>
               </div>
-              <span >${data.price}</span> <button className='com' onClick={()=>addToFoodCart(data.id)}>Buy Item</button>
-              <Comment/>
-            </div>
-                  </>
-                )
-              })}
+            ))
+          ) : (
+            <div className='no1'><h3>No products found.</h3></div>)}
           </div>
         </div>
             <Footer1343/>
@@ -90,4 +132,4 @@ const Movies = ()=>{
     )
 }
 
-export default Movies
+export default Food

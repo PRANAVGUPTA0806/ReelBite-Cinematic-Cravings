@@ -6,6 +6,7 @@
 }
 .movieContainer{
   padding:10px;
+  min-height: 100vh;
   background-color: #282929;
   
 }
@@ -17,6 +18,9 @@ display:flex;
 flex-wrap: wrap;
 flex-direction: row;
 justify-content: center;
+}
+.no1{
+  color:white;
 }
  
 .movieCardCont{

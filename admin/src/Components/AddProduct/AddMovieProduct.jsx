@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './AddProduct.css'
 import upload_area from '../../assets/upload_area.svg'
 
+
 const AddMovieProduct = () => {
 
     const [image,setImage]=useState(false);
@@ -28,7 +29,12 @@ const AddMovieProduct = () => {
 
         let formData=new FormData();
         formData.append('product',image);
-
+        const token = localStorage.getItem('auth-token'); // Retrieve the token
+    
+        if (!token) {
+            console.error('No token found in localStorage');
+            return;
+        }
         await fetch('http://localhost:8000/upload/image',{
             method:'POST',
             headers:{
@@ -45,7 +51,8 @@ const AddMovieProduct = () => {
                     method:'POST',
                     headers:{
                         Accept:'application/json',
-                        'Content-Type':'application/json',
+                        "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
                     },
                     body:JSON.stringify(product),
                 }
@@ -66,6 +73,7 @@ const AddMovieProduct = () => {
     }
   return (
     <div className='add-product'>
+      <h1>Add Movies</h1>
       <div className="addproduct-itemfield">
         <p>Product Title</p>
         <input type="text" value={productDetails.productName} onChange={changeHandler} name='productName' placeholder='Type product name here ' />
@@ -83,16 +91,6 @@ const AddMovieProduct = () => {
       <div className="addproduct-itemfield">
       <p>Product Category</p>
       <input type="text" value={productDetails.category} onChange={changeHandler}  name='category' placeholder='Type product genre here ' />
-      {/* <select name="category" className='add-product-selector'>
-      <option value="Horror">Horror</option>
-      <option value="Science fiction">Science fiction</option>
-      <option value="Thriller">Thriller</option>
-      <option value="Comedy">Comedy</option>
-      <option value="Action">Action</option>
-      <option value="Romance">Romance</option>
-      <option value="Drama">Drama</option>
-      <option value="Adventure">Adventure</option>
-      </select> */}
       </div>
       <div className="addproduct-itemfield">
       <p>Product Available</p>

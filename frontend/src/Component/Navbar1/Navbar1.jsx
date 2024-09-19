@@ -6,12 +6,47 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass,faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { MovieContext } from '../../Context/MovieContext';
-const Navbar1 = ()=>{
+const Navbar1 = ({ setSearchTerm,quantityAdded })=>{
+    
     const navigate = useNavigate();
     const handleCart = ()=>{
         navigate('/addcart')
     }
-    const {itema,item} = useContext(MovieContext)
+    const [total1, setTotal] = useState(0);
+    const [errorMessage, setErrorMessage] = useState('');
+    useEffect(() => {
+        const fetchMovieCartItems = async () => {
+          const token = localStorage.getItem('auth-token'); // Retrieve the token
+    
+      if (!token) {
+        console.log('No token found in localStorage');
+        return;
+      }
+            try {
+                const response = await fetch('http://localhost:8000/api/cart/',{
+                  method:'GET',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}` // Set the Authorization header
+                  }
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                setTotal(data.totalQuantity)
+            } catch (error) {
+                setErrorMessage('Failed to load  cart items: ' + error.message);
+            }
+        };
+    
+        fetchMovieCartItems();
+    }, [quantityAdded]);
+    
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value.toLowerCase());
+      };
+    // const {itema,item} = useContext(MovieContext)
     return(
         <>
         <div className="Navwrapper">
@@ -37,7 +72,7 @@ const Navbar1 = ()=>{
                 </div>
                 <div className="NavSearchdiv">
                     <div className="NavSearchcont">
-                        <input type="text" placeholder="Search..... "/>
+                        <input type="text" placeholder="Search..... " onChange={handleSearchChange}/>
                         <span><FontAwesomeIcon icon={faMagnifyingGlass} /></span>
                        
                     </div>
@@ -46,7 +81,7 @@ const Navbar1 = ()=>{
                         
                  
                     </div>
-                    <div className='basket'>{localStorage.getItem('auth-token')?(itema+item):0}</div>
+                    <div className='basket'>{total1}</div>
                     {localStorage.getItem('auth-token')?<button  id="btn1" onClick={()=>{localStorage.removeItem('auth-token');window.location.replace('/food')}}>Logout</button>
           :<Link  style={{ textDecoration: "None" }} id="btn1" className="btn btn-full" to='/login'>Log In</Link>}
                 </div>

@@ -22,6 +22,14 @@ const userSchema = mongoose.Schema(
     },
     resetToken: String,
   resetTokenExpire: Date,
+  carts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Cart'
+}],
+currentCart: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Cart'
+}
   },
   {
     timestamps: true, // Automatically adds createdAt and updatedAt fields

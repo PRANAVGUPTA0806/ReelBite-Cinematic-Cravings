@@ -6,17 +6,20 @@ import MovieProduct from '../../Components/MovieProduct/MovieProduct'
 import FoodProduct from '../../Components/FoodProduct/FoodProduct'
 import AddFoodProduct from '../../Components/AddProduct/AddFoodProduct'
 import AddMovieProduct from '../../Components/AddProduct/AddMovieProduct'
+import AllOrder from '../../Components/AllOrder/AllOrder';
 
 const Admin = () => {
   return (
     <div className='admin'>
       <Sidebar/>
       <Routes>
-      <Route path='/addfoodproduct' element={<AddFoodProduct/>}/>
-        <Route path='/addmovieproduct' element={<AddMovieProduct/>}/>
-        <Route path='/movieproduct' element={<MovieProduct/>}/>
-        <Route path='/foodproduct' element={<FoodProduct/>}/>
+      <Route path='addfoodproduct' element={<AddFoodProduct/>}/>
+        <Route path='addmovieproduct' element={<AddMovieProduct/>}/>
+        <Route path='movieproduct' element={<MovieProduct/>}/>
+        <Route path='foodproduct' element={<FoodProduct/>}/>
+        <Route path='allorders' element={<AllOrder/>}/>
       </Routes>
+
 
     </div>
   )

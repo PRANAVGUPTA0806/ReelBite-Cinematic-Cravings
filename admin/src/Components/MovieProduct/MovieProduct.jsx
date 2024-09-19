@@ -3,6 +3,7 @@ import './MovieProduct.css'
 import removeicon from '../../assets/cross_icon.png'
 import editicon from '../../assets/edit.png'
 
+
 const MovieProduct = () => {
   const[allproducts,setAllProducts]=useState([]);
   const [isEditing, setIsEditing] = useState(false);
@@ -14,6 +15,23 @@ const MovieProduct = () => {
     available: false,
     image: ''
   });
+  const handleDelete = (productid) => {
+    const confirmDelete = window.confirm("Do you really want to delete this product?");
+    if (confirmDelete) {
+      remove_product(productid);
+    }};
+
+    const handleUpdate = () => {
+      const confirmEditing = window.confirm("Do you really want to edit it");
+      if(confirmEditing){
+        saveProduct();
+      }
+      else{
+        setIsEditing(false);
+      }
+      
+        
+    };
   const fetchInfo =async()=>{
     await fetch('http://localhost:8000/api/moviesproducts/all').then((res)=>res.json()).then((data)=>{
       setAllProducts(data)
@@ -41,6 +59,7 @@ const MovieProduct = () => {
     });
     
   };
+  
   const handleInputChange = (e) => {
     setCurrentProduct({ ...currentProduct, [e.target.name]: e.target.value });
   };
@@ -68,14 +87,13 @@ const MovieProduct = () => {
       await fetchInfo();  // Refresh the product list after editing
     } catch (error) {
       alert("Error updating product:", error)
-      // console.error("Error updating product:", error);
-      // Optionally, show an error message to the user
     }
   };
   
 
   return (
     <div className='list-product'>
+    
       <h1>All Movies</h1>
       <div className="listproduct-format-main">
         <p>Movies</p>
@@ -85,6 +103,7 @@ const MovieProduct = () => {
         <p>Available</p>
         <p>Remove/Edit</p>
       </div>
+      
       <div className="listproduct-allproducts">
         <hr />
         {allproducts.map((product,index)=>{
@@ -95,7 +114,7 @@ const MovieProduct = () => {
             <p>{product.category}</p>
             <p>{product.available?"true":"false"}</p>
             <div>
-            <img onClick={()=>{remove_product(product.product_id)}} className='listproduct-remove-icon' src={removeicon} alt="" />
+            <img onClick={()=>{  handleDelete(product.product_id)}} className='listproduct-remove-icon' src={removeicon} alt="" />
             <img  onClick={() => editProduct(product,product.product_id)} className='listproduct-remove-icon' src={editicon} alt="" />
             </div>
           </div>
@@ -148,7 +167,7 @@ const MovieProduct = () => {
           value={currentProduct.image}
           onChange={handleInputChange}
         />
-        <button onClick={saveProduct}>Save Changes</button>
+        <button onClick={handleUpdate}>Save Changes</button>
         <button onClick={() => setIsEditing(false)}>Cancel</button>
       </div>
     )}
