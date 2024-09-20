@@ -32,7 +32,9 @@ const getAllOrders = async (req, res) => {
 };
 const getOrders = async (req, res) => { 
   try {
-    const orders = await Order.find().populate('userId', 'name email').sort({ createdAt: -1 });
+    const userId = req.user._id; // Assuming userId is in req.user after authentication
+
+    const orders = await Order.find({ userId: userId });
     res.status(200).json(orders);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch orders' });

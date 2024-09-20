@@ -6,7 +6,6 @@ import CartItem from './CartItem';
 import { MovieContext } from '../Context/MovieContext';
 import './Exit34.css';
 import movie from '../Food/pics6/make.jpg'
-import CartItem1 from './CartItem1';
 import CartFooter from './CartFooter';
 
 function AddtoCart() {
@@ -179,7 +178,7 @@ const handledeleteQuantity = async (productId) => {
                         />
                     ))
                 ) : (
-                    <p>No items in the movie cart</p>
+                    <p>No items in the cart</p>
                 )}
             
           </div>

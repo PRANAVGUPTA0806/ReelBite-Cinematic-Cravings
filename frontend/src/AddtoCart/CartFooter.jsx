@@ -59,7 +59,7 @@ const CartFooter = ({ total ,cartItems}) => {
     
                 if (clearCartResponse.ok) {
                     console.log('Cart cleared successfully');
-                    navigate('/home');
+                    navigate('/myorders');
                     alert("Order Placed!! Thank you for visiting :)");
                     setPaidFor(true); // Update state if needed
                 } else {
@@ -115,7 +115,7 @@ const CartFooter = ({ total ,cartItems}) => {
     
                 if (clearCartResponse.ok) {
                     console.log('Cart cleared successfully');
-                    navigate('/home');
+                    navigate('/myorders');
                     alert("Order Placed!! Thank you for visiting :)");
                     setPaidFor(true); // Update state if needed
                 } else {

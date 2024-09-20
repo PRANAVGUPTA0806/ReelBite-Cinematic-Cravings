@@ -58,6 +58,7 @@ const AllOrder = () => {
         <p>{order.order_summary.payment_status}</p>
         <p>Transaction Id:{order.transaction_id}</p>
         <p>{order.payment_method}</p>
+        <p>Order Date&Time:{order.updatedAt}</p>
      
       <hr />
     </div>
