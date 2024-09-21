@@ -121,20 +121,15 @@ const updateProductsById = asyncHandler(async (req, res) => {
 
 const deleteProductsById = asyncHandler(async (req, res) => {
   try{
-  const products = await allProductModel.find({ product_id: req.body.product_id });
+  const products = await allProductModel.find({ products_id: req.body.product_id });
   if (!products) {
     res.status(404);
     throw new Error("Product Not Found");
   }
   console.log(products.products_id);
   
-  if (products.products_id !== req.body.product_id) {
-    res.status(403);
-    throw new Error(
-      "User don't have permission to update other Product Details"
-    );
-  }
-  await allProductModel.deleteOne({ product_id: req.body.id });
+ 
+  await allProductModel.deleteOne({ products_id: req.body.product_id });
   res.status(200).json({
     success: true,
     name: req.body.name,

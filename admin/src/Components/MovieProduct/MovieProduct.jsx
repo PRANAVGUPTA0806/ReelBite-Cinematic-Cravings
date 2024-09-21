@@ -86,6 +86,7 @@ const MovieProduct = () => {
       alert("Product updated")
       await fetchInfo();  // Refresh the product list after editing
     } catch (error) {
+      setIsEditing(false);
       alert("Error updating product:", error)
     }
   };
@@ -114,8 +115,8 @@ const MovieProduct = () => {
             <p>{product.category}</p>
             <p>{product.available?"true":"false"}</p>
             <div>
-            <img onClick={()=>{  handleDelete(product.product_id)}} className='listproduct-remove-icon' src={removeicon} alt="" />
-            <img  onClick={() => editProduct(product,product.product_id)} className='listproduct-remove-icon' src={editicon} alt="" />
+            <img onClick={()=>{  handleDelete(product.products_id)}} className='listproduct-remove-icon' src={removeicon} alt="" />
+            <img  onClick={() => editProduct(product,product.products_id)} className='listproduct-remove-icon' src={editicon} alt="" />
             </div>
           </div>
           <hr />

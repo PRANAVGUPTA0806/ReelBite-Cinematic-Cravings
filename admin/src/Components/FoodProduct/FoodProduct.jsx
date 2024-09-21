@@ -15,12 +15,13 @@ const FoodProduct = () => {
     available: false,
     image: ''
   });
-  const handleDelete = (productid) => {
+  const handleDelete = (product_id) => {
     const confirmDelete = window.confirm("Do you really want to delete this product?");
     if (confirmDelete) {
-      remove_product(productid);
-    }};
-
+      remove_product(product_id); // Pass the product_id directly
+    }
+  };
+  
     const handleUpdate = () => {
       const confirmEditing = window.confirm("Do you really want to edit it");
       if(confirmEditing){
@@ -40,17 +41,31 @@ const FoodProduct = () => {
   useEffect(()=>{
     fetchInfo();
   },[])
-  const remove_product=async(product_id)=>{
-    await fetch('http://localhost:8000/api/foodproducts/del',{
-      method:'DELETE',
-      headers:{
-        Accept:'application/json',
-        'Content-Type':'application/json',
-      },
-      body:JSON.stringify({product_id:product_id})
-    })
-    await fetchInfo();
-  }
+  const remove_product = async (product_id) => {
+  
+  
+    try {
+      const response = await fetch('http://localhost:8000/api/foodproducts/del', {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ product_id }), // Shortened object syntax
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`); // Error handling
+      }
+  
+      await fetchInfo(); // Refresh product list after deletion
+      alert("Product deleted successfully.");
+    } catch (error) {
+      console.error("Error deleting product:", error); // Log any errors
+      alert("Failed to delete the product.");
+    }
+  };
+  
 
   const editProduct = (product,product_id) => {
     setIsEditing(true);
@@ -86,6 +101,7 @@ const FoodProduct = () => {
       alert("Product updated")
       await fetchInfo();  // Refresh the product list after editing
     } catch (error) {
+      setIsEditing(false);
       alert("Error updating product:", error)
     }
   };
@@ -109,10 +125,11 @@ const FoodProduct = () => {
             <img src={product.image} alt="" className="listproduct-product-icon" />
             <p>{product.productName}</p>
             <p>${product.productPrice}</p>
-            <img  onClick={() => editProduct(product,product.product_id)} className='listproduct-remove-icon' src={editicon} alt="" />
+            <img  onClick={() =>{editProduct(product,product.products_id)}} className='listproduct-remove-icon' src={editicon} alt="" />
             <p>{product.available?"true":"false"}</p>
-            <img onClick={()=>{ handleDelete(product.product_id)}} className='listproduct-remove-icon' src={removeicon} alt="" />
-            
+            <img onClick={() => {
+      handleDelete(product.products_id);
+    }} className='listproduct-remove-icon' src={removeicon} alt="" />
           </div>
           <hr />
           </>
