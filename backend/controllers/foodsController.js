@@ -90,15 +90,15 @@ const updateProductsById = asyncHandler(async (req, res) => {
       throw new Error("Product Not Found");
     }
     
-    if (products.products_id !== req.body.product_id) {
-      res.status(403);
-      throw new Error(
-        "User don't have permission to update other Product Details"
-      );
-    }
+    // if (products.products_id !== req.body.products_id) {
+    //   res.status(403);
+    //   throw new Error(
+    //     "User don't have permission to update other Product Details"
+    //   );
+    // }
     // Update the product
     const updatedProduct = await allProductModel.findOneAndUpdate(
-      { product_id: req.body.product_id },
+      { products_id: req.body.products_id },
       req.body,
       { new: true }
     );

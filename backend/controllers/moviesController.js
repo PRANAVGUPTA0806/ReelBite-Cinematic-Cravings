@@ -88,21 +88,21 @@ const getProductsById = asyncHandler(async (req, res) => {
 const updateProductsById = asyncHandler(async (req, res) => {
   try {
     // Find the product by ID
-    const products = await allProductModel.find({ product_id: req.body.product_id });
+    const products = await allProductModel.find({ products_id: req.body.products_id });
     if (!products) {
       res.status(404);
       throw new Error("Product Not Found");
     }
     
-    if (products.products_id !== req.body.product_id) {
-      res.status(403);
-      throw new Error(
-        "User don't have permission to update other Product Details"
-      );
-    }
+    // if (products.products_id !== req.body.products_id) {
+    //   res.status(403);
+    //   throw new Error(
+    //     "User don't have permission to update other Product Details"
+    //   );
+    // }
     // Update the product
     const updatedProduct = await allProductModel.findOneAndUpdate(
-      { product_id: req.body.product_id },
+      { products_id: req.body.products_id },
       req.body,
       { new: true }
     );
