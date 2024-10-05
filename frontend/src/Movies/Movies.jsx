@@ -69,6 +69,11 @@ const Movies = () => {
   );
   const addToCart = async (productId, quantity = 1) => {
     setQuantityAdd(false);
+    const t=localStorage.getItem('auth-token');
+    if(!t){
+      alert('Failed to add Food to cart:Login/Signup first');
+      return;
+    }
     try {
       const response = await fetch('http://localhost:8000/api/cart/add', {
         method: 'POST',
