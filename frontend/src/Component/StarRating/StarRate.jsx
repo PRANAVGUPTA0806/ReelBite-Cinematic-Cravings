@@ -8,6 +8,10 @@ const StarRate = ({ userId, productId, productModel }) => {
 
   useEffect(() => {
     const fetchUserRating = async () => {
+      const t=localStorage.getItem('auth-token');
+    if(!t){
+      return;
+    }
       try {
         const response = await fetch(`http://localhost:8000/api/rating/rating/${userId}/${productId}`);
         const data = await response.json();
@@ -24,6 +28,8 @@ const StarRate = ({ userId, productId, productModel }) => {
   }, [userId, productId]); // Now, the useEffect depends only on userId and productId
 
   const saveRating = async (currentRating) => {
+  
+    
     try {
       const response = await fetch("http://localhost:8000/api/rating/save-rating", {
         method: "POST",
