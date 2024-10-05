@@ -71,7 +71,7 @@ const Movies = () => {
     setQuantityAdd(false);
     const t=localStorage.getItem('auth-token');
     if(!t){
-      alert('Failed to add Food to cart:Login/Signup first');
+      alert('Failed to add Movie to cart:Login/Signup first');
       return;
     }
     try {
