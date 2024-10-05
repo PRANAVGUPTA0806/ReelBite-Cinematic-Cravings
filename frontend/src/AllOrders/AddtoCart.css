@@ -41,6 +41,32 @@
   justify-content: space-between;
   align-items: center;
 }
+.blankCartContainer3 {
+  height: 550px;
+  margin-left: 25%;
+  width: 550px;
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Align items vertically */
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+}
+
+.blankCartContainer3 img {
+  max-width: 100%; /* Ensure the image is responsive */
+  height: auto; /* Maintain aspect ratio */
+}
+.cartHeading3{
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  
+}
+
+.cartHeading3 > h1{
+  font-size: 28px;
+  color: black;
+}
+
 
 /* Adjustments for smaller screens */
 @media screen and (max-width: 768px) {

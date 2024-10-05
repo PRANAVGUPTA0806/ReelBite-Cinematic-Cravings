@@ -1,6 +1,7 @@
 import React, { useState, useEffect,useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './Food.css'
+import blankproduct from "../assets/nop.jpg";
 import Navbar1 from '../Component/Navbar1/Navbar1';
 import movie from './pics6/make.jpg'
 import './Exit49.css'
@@ -120,7 +121,11 @@ const Food = ()=>{
               </div>
             ))
           ) : (
-            <div className='no1'><h3>No products found.</h3></div>)}
+            <div className="blankCartContainer2">
+                  <img src={blankproduct} alt="Empty cart" />
+                  <div className="cartHeading2">
+                  </div>
+                </div>)}
           </div>
         </div>
             <Footer1343/>

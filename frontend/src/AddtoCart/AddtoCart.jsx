@@ -1,6 +1,7 @@
 import React, { useState,useEffect,useContext } from 'react'
 import Navbar from '../Component/Navbar/Navbar3'
 import './AddtoCart.css';
+import blankCart from "../assets/emptyCart.svg";
 import { movieitems ,fooditems } from '../Data'; 
 import CartItem from './CartItem';
 import { MovieContext } from '../Context/MovieContext';
@@ -178,7 +179,12 @@ const handledeleteQuantity = async (productId) => {
                         />
                     ))
                 ) : (
-                    <p>No items in the cart</p>
+                  <div className="blankCartContainer">
+                  <img src={blankCart} alt="Empty cart" />
+                  <div className="cartHeading">
+                    <h1>Your Cart is Empty!!</h1>
+                  </div>
+                </div>
                 )}
             
           </div>

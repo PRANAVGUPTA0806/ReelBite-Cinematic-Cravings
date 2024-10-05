@@ -25,6 +25,32 @@
 .no{
   color: white;
 }
+.blankCartContainer1 {
+  height: 550px;
+  margin-left: 10%;
+  width: 550px;
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Align items vertically */
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+}
+
+.blankCartContainer1 img {
+  max-width: 100%; /* Ensure the image is responsive */
+  height: auto; /* Maintain aspect ratio */
+}
+.cartHeading1{
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  
+}
+
+.cartHeading1 > h1{
+  font-size: 28px;
+  color: black;
+}
+
    
 .movieCardCont{
   height:600px;

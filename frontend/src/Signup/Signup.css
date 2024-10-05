@@ -4,7 +4,15 @@
 	line-height: 1.5;
 	overflow: hidden;
   }
-  
+  .togglePasswordButton {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute; /* Positioning it inside the input field */
+    right: 45px; /* Adjust this to position the button within the input */
+    top: 55%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for perfect centering */
+  }
   .bgimge {
 	position: absolute;
 	height: 100%;

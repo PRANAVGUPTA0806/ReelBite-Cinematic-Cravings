@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './Movies.css'
+import blankproduct from "../assets/nop.jpg";
 import Navbar from '../Component/Navbar/Navbar';
 import movie from './pics5/movieticket.jpg'
 import './Exit19.css'
@@ -119,7 +120,11 @@ const Movies = () => {
               </div>
             ))
           ) : (
-            <div className='no'><h3>No products found.</h3></div>)}
+            <div className="blankCartContainer1">
+                  <img src={blankproduct} alt="Empty cart" />
+                  <div className="cartHeading1">
+                  </div>
+                </div>)}
           </div>
         </div>
         <Footer134/>

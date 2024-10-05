@@ -40,7 +40,15 @@ body {
     opacity: 0.7;
     transition: opacity 0.3s ease;
 }
-
+.togglePasswordButton1 {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute; /* Positioning it inside the input field */
+    right:20px; /* Adjust this to position the button within the input */
+    top: 58%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for perfect centering */
+  }
 .btn:focus {
     opacity: 1;
 }

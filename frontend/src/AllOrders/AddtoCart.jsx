@@ -5,6 +5,7 @@ import CartItem from './CartItem';
 import { MovieContext } from '../Context/MovieContext';
 import './Exit34.css';
 import movie from '../Food/pics6/make.jpg'
+import blankorder from "../assets/no_order.png";
 
 function AddtoCart() {
   
@@ -96,7 +97,12 @@ function AddtoCart() {
                 item={order}
               />
             ))) : (
-            <p>No orders yet:)</p>
+            <div className="blankCartContainer3">
+                  <img src={blankorder} alt="Empty cart" />
+                  <div className="cartHeading3">
+                    <h1>No orders yet:)</h1>
+                  </div>
+                </div>
             )}
             
             
