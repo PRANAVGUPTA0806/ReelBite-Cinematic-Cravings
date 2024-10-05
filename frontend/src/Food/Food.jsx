@@ -106,7 +106,7 @@ const Food = ()=>{
                 <img className='movieCardImg' src={data.image} alt={data.name} />
                 <div className='movieCardRate'>
                   <span>{data.productName}</span>
-                  <StarRate userId={data._id} productId={data._id} />
+                  <StarRate userId={localStorage.getItem("id")} productId={data._id} productModel="foods" />
                 </div>
                 {/* <span>{data.category}</span><br /> */}
                 <span>${data.productPrice}</span>

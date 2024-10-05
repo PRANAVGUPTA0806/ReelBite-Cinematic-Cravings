@@ -41,6 +41,7 @@ function Signup() {
 
       if (responseData._id) {
         localStorage.setItem('auth-token', responseData.token);
+        localStorage.setItem('id', responseData._id);
         alert("You are signed up... WELCOME TO ... !!");
         navigate('/home');
       } else {

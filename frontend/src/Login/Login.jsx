@@ -39,7 +39,7 @@ const Login = () => {
       if (responseData.token) {
         
         localStorage.setItem('auth-token', responseData.token);
-
+        localStorage.setItem('id', responseData._id);
         console.log("Login successful");
         if (responseData.role === 'admin') {
           console.log("Admin login successful");
