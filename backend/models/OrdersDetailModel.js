@@ -61,6 +61,11 @@ const OrderSchema = new mongoose.Schema(
     },
     payment_method: { type: String },
     transaction_id: { type: String },
+    payment_status: {
+      type: String,
+      enum: ['Pending', 'Paid', 'Failed'],
+      required: true
+    },
     order_history: [
       {
         

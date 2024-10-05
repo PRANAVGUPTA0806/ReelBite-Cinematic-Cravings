@@ -24,7 +24,7 @@ const CartItem = ({ item }) => {
                         
                         <span>${item.order_summary.totalPrice}</span>
                         <span>
-                        <p>{item.order_summary.payment_status}</p>
+                        <p>{item.payment_status}</p>
                         {item.transaction_id ? (<p>Transaction ID: {item.transaction_id}</p>
                         ) : (<p>No Transaction ID Available</p>)}
 

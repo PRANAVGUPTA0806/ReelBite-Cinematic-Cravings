@@ -41,7 +41,7 @@ const StarRate = ({ userId, productId, productModel }) => {
       const data = await response.json();
 
       if (data.success) {
-        console.log("Rating saved successfully");
+        
       } else {
         console.log("Error saving rating:", data.message);
       }

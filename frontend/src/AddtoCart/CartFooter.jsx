@@ -40,7 +40,8 @@ const CartFooter = ({ total ,cartItems}) => {
                 body: JSON.stringify({
                     order_summary: cartItems,
                     transaction_id:"na",
-                    payment_method: "CASH", // Include order summary
+                    payment_method: "CASH",
+                    payment_status:"Paid", // Include order summary
                     // Add other necessary fields here, e.g., billing_information, shipping_information
                 }),
             });
@@ -96,7 +97,8 @@ const CartFooter = ({ total ,cartItems}) => {
                 body: JSON.stringify({
                     order_summary: cartItems, 
                     transaction_id:orderId,
-                    payment_method: "ONLINE",// Include order summary
+                    payment_method: "ONLINE",
+                    payment_status:"Paid",// Include order summary
                     // Add other necessary fields here, e.g., billing_information, shipping_information
                 }),
             });
@@ -130,6 +132,41 @@ const CartFooter = ({ total ,cartItems}) => {
             console.error("Error during checkout:", error);
         }
     };
+    const handleCancel = async () => {
+        const token = localStorage.getItem('auth-token');
+    
+        if (!token) {
+            console.error('No token found in localStorage');
+            return;
+        }
+    
+        try {
+            const response = await fetch("http://localhost:8000/api/orders", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    order_summary: cartItems,
+                    transaction_id: "", // No transaction ID since it was cancelled
+                    payment_method: "ONLINE",
+                    payment_status: "Failed",
+                }),
+            });
+    
+            if (response.ok) {
+                console.log('Order marked as failed due to cancellation.');
+                alert("Payment was cancelled. Your order is not placed.");
+            } else {
+                const errorData = await response.json();
+                console.error("Failed to mark order as failed:", errorData);
+            }
+        } catch (error) {
+            console.error("Error during payment cancellation:", error);
+        }
+    };
+
 
     if (paidFor) {
         navigate('/home');
@@ -175,7 +212,8 @@ const CartFooter = ({ total ,cartItems}) => {
                                     handleApprove(data.orderID);
                                 }}
                                 onCancel={() => {
-                                    console.log("Payment cancelled");
+                                    console.log("Payment cancelled by the user.");
+                                    handleCancel(); // Handle cancellation
                                 }}
                             />
                         )}

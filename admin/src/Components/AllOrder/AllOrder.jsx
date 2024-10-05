@@ -55,7 +55,7 @@ const AllOrder = () => {
           </div>
         ))}
         <p> ${order.order_summary.totalPrice}</p>
-        <p>{order.order_summary.payment_status}</p>
+        <p>{order.payment_status}</p>
         <p>Transaction Id:{order.transaction_id}</p>
         <p>{order.payment_method}</p>
         <p>Order Date&Time:{order.updatedAt}</p>
