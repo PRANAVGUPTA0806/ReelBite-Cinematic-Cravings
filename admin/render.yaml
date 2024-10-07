@@ -1,8 +1,0 @@
-version: 1
-services:
-  - type: static  # Change this to 'static' for serving built files directly
-    name: reelbitecinematiccravings
-    env: node  # You can keep this as node, but note it might not be needed for static
-    buildCommand: npm run build
-    staticPublishPath: dist  # Specify the folder where the built files are located
-    autoDeploy: true
