@@ -28,8 +28,13 @@ const sendPasswordResetEmail = async (to, resetUrl) => {
       from: process.env.EMAIL_USER, // sender address
       to, // receiver address
       subject: 'Password Reset Request',
-      html: `<p>You requested a password reset. Click <a href="${resetUrl}">here</a> to reset your password.</p>`,
-    });
+      html: `
+      <p>You requested a password reset.</p>
+      <p>Click <a href="${resetUrl}">here</a> to reset your password.</p>
+      <p>Please note that this link will expire in 1 hour.</p>
+      <p>If you did not request a password reset, please ignore this email.</p>
+      <p>Thank you!</p>
+    `,});
     console.log('Password reset email sent');
   } catch (error) {
     console.error('Error sending password reset email:', error);

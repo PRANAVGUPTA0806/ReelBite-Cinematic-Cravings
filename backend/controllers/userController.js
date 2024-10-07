@@ -167,7 +167,8 @@ const requestPasswordReset = asyncHandler(async (req, res) => {
   user.resetTokenExpire = Date.now() + 3600000; // 1 hour expiration
   await user.save();
 
-  const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+  const frontendUrl = req.headers.origin; // Get the request origin (domain)
+  const resetUrl = `${frontendUrl}/reset-password/${resetToken}`;
   await sendPasswordResetEmail(user.email, resetUrl);
 
   res.json({ success: true });
