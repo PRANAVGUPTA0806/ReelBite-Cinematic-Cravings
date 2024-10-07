@@ -37,7 +37,7 @@ const Food = ()=>{
       try {
         console.log('Backend URL:', import.meta.env.VITE_BACKEND_URL);
 
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/foodproducts/all`);
+        const response = await fetch(`https://reelbitecinematiccravings1.onrender.com/api/foodproducts/all`);
         const data = await response.json();
         setMovieItems(data); // Store fetched movie data in state
       } catch (error) {
@@ -80,7 +80,7 @@ const Food = ()=>{
       return;
     }
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart/add`, {
+      const response = await fetch(`https://reelbitecinematiccravings1.onrender.com/api/cart/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
