@@ -1,133 +1,129 @@
-
-.cartWrapper {
+#cartWrapper {
   width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
-  overflow-y: auto; 
-  background-color: #E6E6FA;/* Change to auto for better responsiveness */
+  background-color: #E6E6FA;
 }
 
-.cartContainer {
+#cartContainer {
   width: 100%;
   display: flex;
-  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  flex-wrap: wrap;
 }
 
-.CartLeft,
-.CartRight {
+#CartLeft {
   flex: 1;
-  padding: 0 10px;
-      border:1px solid black;
-      min-height: 100vh;
-
+  padding: 20px;
+  min-height: 100vh;
+  border: 1px solid black;
 }
 
-.cartHeader {
+#cartHeader {
   height: 70px;
-  margin-top: 20px;
-  margin-left: 10px;
+  margin: 20px 10px;
   display: flex;
   align-items: center;
 }
 
-.headerLeft {
+#headerLeft {
   flex: 1;
   margin-left: 20px;
 }
 
-.headerRight {
+#headerRight {
   flex: 2;
   display: flex;
   justify-content: space-between;
+}
+
+#blankCartContainer {
+  height: 550px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
-.blankCartContainer3 {
-  height: 550px;
-  margin-left: 25%;
-  width: 550px;
-  display: flex; /* Enable flexbox */
-  flex-direction: column; /* Align items vertically */
-  justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
+
+#blankCartContainer img {
+  max-width: 100%;
+  height: auto;
 }
 
-.blankCartContainer3 img {
-  max-width: 100%; /* Ensure the image is responsive */
-  height: auto; /* Maintain aspect ratio */
-}
-.cartHeading3{
-  display: flex;
-  justify-content: center;
+#cartHeading {
   margin-top: 32px;
-  
+  text-align: center;
 }
 
-.cartHeading3 > h1{
+#cartHeading h1 {
   font-size: 28px;
   color: black;
 }
 
+#footer {
+  background-color: black;
+  text-align: center;
+  padding: 2rem 0;
+  color: white;
+}
 
-/* Adjustments for smaller screens */
+#social-links {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.4rem;
+}
+
+#social-links a {
+  border: 2px solid #fff;
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 0 0.3rem;
+  transition: background 0.5s ease;
+}
+
+#social-links a:hover {
+  background: #e20707;
+}
+
+#exit-popup {
+  background-color: #f9f9f9;
+  border: 2px solid #ccc;
+  padding: 20px;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  z-index: 1000;
+  text-align: center;
+}
+
+#continue-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
-  .cartContainer {
-      flex-direction: column; /* Stack items vertically on smaller screens */
+  #cartContainer {
+    flex-direction: column;
   }
 
-  .CartLeft,
-  .CartRight {
-      flex: 1;
-      width: 100%; /* Full width on smaller screens */
+  #CartLeft {
+    width: 100%;
   }
 }
 
-/* Additional adjustments for larger screens if needed */
 @media screen and (min-width: 1024px) {
-  .CartLeft,
-  .CartRight {
-      min-height: 420px; /* Restore min-height for larger screens if necessary */
+  #CartLeft {
+    min-height: 420px;
   }
 }
-
-.rrrrr{
-    background: var(--exDark);
-    color: black;
-    background-color: black;
-    text-align: center;
-    padding: 2rem 0;
- 
-  }
-  .social-links334{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1.4rem;
-    background-color: black;
-    /* height:60vh; */
-  }
-  .social-links334 a{
-    border: 2px solid #fff;
-    color: red;
-    display: block;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    text-decoration: none;
-    margin: 0 0.3rem;
-    transition: all 0.5s ease;
-  }
-  
-  .social-links334 a:hover{
-    background: #e20707;
-    color: var(--exDark);
-  }
-  .rrrrr span{
-    margin-top: 1rem;
-    display: block;
-    /* background: #e20707; */
-    color: var(--exDark);
-    font-family: var(--Playfair);
-    letter-spacing: 2px;
-  }

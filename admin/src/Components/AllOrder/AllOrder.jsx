@@ -1,72 +1,76 @@
-import React, { useEffect, useState } from 'react'
-import './AllOrder.css'
-import removeicon from '../../assets/cross_icon.png'
-import editicon from '../../assets/edit.png'
-import Navbar from '../Navbar/Navbar'
-import Admin from '../../Pages/Admin/Admin'
-import Sidebar from '../Sidebar/Sidebar'
+import React, { useEffect, useState } from 'react';
+import './AllOrder.css';
+import removeicon from '../../assets/cross_icon.png';
+import editicon from '../../assets/edit.png';
+import Navbar from '../Navbar/Navbar';
+import Admin from '../../Pages/Admin/Admin';
+import Sidebar from '../Sidebar/Sidebar';
 
 const AllOrder = () => {
-  const[allproducts,setAllProducts]=useState([]);
-  const fetchInfo =async()=>{
+  const [allproducts, setAllProducts] = useState([]);
+  
+  const fetchInfo = async () => {
     const token = localStorage.getItem('auth-token'); // Retrieve the token
     
-        if (!token) {
-            console.error('No token found in localStorage');
-            return;
-        }
+    if (!token) {
+      console.error('No token found in localStorage');
+      return;
+    }
+    
     await fetch('http://localhost:8000/api/admin/orders', {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}` // Include token for authentication
-        }}).then((res)=>res.json()).then((data)=>{
-      setAllProducts(data)
-    });
-  }
-  useEffect(()=>{
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Include token for authentication
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setAllProducts(data);
+      });
+  };
+  
+  useEffect(() => {
     fetchInfo();
-  },[])
+  }, []);
 
   return (
-    <div className='list-product'>
-    
+    <div id="list-product">
       <h1>All Orders</h1>
-      <div className="listproduct-format-main">
-        <p>ORDERS</p>
-        <p>ID</p>
+      <div id="listproduct-format-main">
+        <p>Order ID</p>
         <p>Details</p>
         <p>Total Price</p>
-        <p>Payment Details </p>
+        <p>Payment Status</p>
+        <p>Transaction ID</p>
+        <p>Payment Method</p>
+        <p>Order Date & Time</p>
       </div>
-      <div className="listproduct-allproducts">
-  <hr />
-  {allproducts.map((order, index) => (
-    <div key={index} className="listproduct-format-main listproduct-format">
-   
-        <p> {order._id}</p>
-        {order.order_summary.items.map((item, i) => (
-          <div key={i} className="listproduct-format-main listproduct-format">
-            
-            <p>Title:{item.productName}</p>
-            <p>Price :${item.price}</p>
-            <p>DESCRIPTION:{item.productDescription}</p>
-            <p>Quantity: {item.quantity}</p>
+      <div id="listproduct-allproducts">
+        <hr />
+        {allproducts.map((order, index) => (
+          <div key={index} id="listproduct-format">
+            <p>{order._id}</p>
+            <div id="order-details">
+              {order.order_summary.items.map((item, i) => (
+                <div key={i}>
+                  <p><strong>Title:</strong> {item.productName}</p>
+                  <p><strong>Price:</strong> ${item.price}</p>
+                  <p><strong>Quantity:</strong> {item.quantity}</p>
+                </div>
+              ))}
+            </div>
+            <p>${order.order_summary.totalPrice}</p>
+            <p>{order.payment_status}</p>
+            <p>{order.transaction_id || 'N/A'}</p>
+            <p>{order.payment_method}</p>
+            <p>{new Date(order.updatedAt).toLocaleString()}</p>
+            <hr />
           </div>
         ))}
-        <p> ${order.order_summary.totalPrice}</p>
-        <p>{order.payment_status}</p>
-        <p>Transaction Id:{order.transaction_id}</p>
-        <p>{order.payment_method}</p>
-        <p>Order Date&Time:{order.updatedAt}</p>
-     
-      <hr />
+      </div>
     </div>
-  ))}
-</div>
-  </div>
+  );
+};
 
-  )
-}
-
-export default AllOrder
+export default AllOrder;

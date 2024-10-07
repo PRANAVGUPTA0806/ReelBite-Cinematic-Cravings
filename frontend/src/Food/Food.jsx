@@ -1,7 +1,7 @@
 import React, { useState, useEffect,useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './Food.css'
-import blankproduct from "../assets/nop.jpg";
+import blankproduct from "../assets/nop.png";
 import Navbar1 from '../Component/Navbar1/Navbar1';
 import movie from './pics6/make.jpg'
 import './Exit49.css'

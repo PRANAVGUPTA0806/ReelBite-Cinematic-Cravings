@@ -13,7 +13,15 @@
 	background-color: red;
 	background-size: cover;
   }
-  
+  .togglePasswordButton15 {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute; /* Positioning it inside the input field */
+    right:35px; /* Adjust this to position the button within the input */
+    top: 48%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for perfect centering */
+  }
   * {
 	box-sizing: border-box;
 	margin: 0;

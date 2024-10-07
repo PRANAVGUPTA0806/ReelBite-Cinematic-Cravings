@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './Movies.css'
-import blankproduct from "../assets/nop.jpg";
+import blankproduct from "../assets/nov.png";
 import Navbar from '../Component/Navbar/Navbar';
 import movie from './pics5/movieticket.jpg'
 import './Exit19.css'

@@ -1,65 +1,95 @@
-.list-product{
+/* Main container for the list of products */
+#list-product {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 740px;
-    padding: 10px 50px;
-    margin: 30px;
-    border-radius: 6px;
-    background: white;
+    padding: 20px;
+    margin: 30px auto;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     overflow-x: auto;
-}
-.list-product h1{
-    color: black;
-}
-
-.listproduct-format-main{
+  }
+  
+  /* Header styling */
+  #list-product h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Grid layout for the order list headings */
+  #listproduct-format-main {
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr 1fr 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: repeat(6, 1fr); /* 6 columns */
+    gap: 15px;
     width: 100%;
-    /* overflow-x: auto; */
-    padding: 20px 0px;
-    color: #454545;
-    font-size: 15px;
-    font-weight:600 ;
-}
-.listproduct-format{
+    padding: 10px 0;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    color: #444;
+    text-align: left;
+  }
+  
+  /* Grid layout for individual product order rows */
+  #listproduct-format {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Matches heading layout */
+    gap: 15px;
     align-items: center;
-    overflow-x: auto;
+    padding: 15px 0;
+    color: #555;
+    font-size: 14px;
+    border-bottom: 1px solid #ececec;
+  }
+  
+  /* Scroll container for all orders */
+  #listproduct-allproducts {
+    max-height: 500px;
     overflow-y: auto;
-    font-weight: 500;
-}
-
-.listproduct-product-icon{
-    height: 80px;
-}
-
-.listproduct-remove-icon{
-    cursor: pointer;
-    margin: auto;
-}
-.listproduct-allproducts{
-    overflow-y: auto;
-    overflow-x: auto;
-}
-
-@media(max-width:800px)
-{
-    .list-product{
-        box-sizing: border-box;
-        width: 95%;
-        height: 100%;
-        padding: 10px 30px;
-        margin: 20px auto;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 1200px) {
+    #listproduct-format-main,
+    #listproduct-format {
+      grid-template-columns: repeat(5, 1fr); /* Reduce to 5 columns */
     }
-    .listproduct-format-main{
-        padding: 15px 0px;
-        color: #454545;
-        font-size: 12px;
+  }
+  
+  @media (max-width: 992px) {
+    #listproduct-format-main,
+    #listproduct-format {
+      grid-template-columns: repeat(4, 1fr); /* Reduce to 4 columns */
+      font-size: 14px;
     }
-    .listproduct-remove-icon{
-        height: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    #list-product {
+      width: 95%;
+      padding: 10px 20px;
+      margin: 20px auto;
     }
-}
+  
+    #listproduct-format-main,
+    #listproduct-format {
+      grid-template-columns: repeat(3, 1fr); /* Reduce to 3 columns */
+      font-size: 13px;
+      gap: 10px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    #listproduct-format-main,
+    #listproduct-format {
+      grid-template-columns: repeat(2, 1fr); /* Reduce to 2 columns */
+      font-size: 12px;
+      gap: 8px;
+    }
+  }
+  

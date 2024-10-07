@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import './PasswordReset.css'
 import { useParams, useNavigate } from 'react-router-dom';
+import eyeIcon from "../assets/eye.png"; 
+import eyeSlashIcon from "../assets/eye-2.png";
+import eyeIcon1 from "../assets/eye1.png"; 
+import eyeSlashIcon1 from "../assets/eye-21.png";
 
 const PasswordReset = () => {
   const { resetToken } = useParams(); // Extract resetToken from URL params
@@ -9,6 +13,14 @@ const PasswordReset = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev); // Toggle the password visibility
+  };
+  const [showPassword1, setShowPassword1] = useState(false);
+  const togglePasswordVisibility1= () => {
+    setShowPassword1((prev) => !prev); // Toggle the password visibility
+  };
 
   const handlePasswordReset = async (e) => {
     e.preventDefault();
@@ -62,10 +74,22 @@ const PasswordReset = () => {
               name='password' 
               value={newPassword} 
               onChange={(e) => setNewPassword(e.target.value)}
-              type="password" 
+              type={showPassword ? "text" : "password"} 
               id="password"
               required 
             />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="togglePasswordButton14"
+            >
+              <img
+                src={showPassword ? eyeSlashIcon : eyeIcon}
+                alt={showPassword ? "Hide password" : "Show password"}
+                width="24"
+                height="24"
+              />
+            </button>
           </div>
           <div className="control">
             <label htmlFor="password">Confirm New Password:</label>
@@ -73,10 +97,22 @@ const PasswordReset = () => {
               name='password' 
               value={confirmPassword} 
               onChange={(e) => setConfirmPassword(e.target.value)}
-              type="password" 
+              type={showPassword1 ? "text" : "password"}
               id="password" 
               required 
             />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility1}
+              className="togglePasswordButton1"
+            >
+              <img
+                src={showPassword1 ? eyeSlashIcon1 : eyeIcon1}
+                alt={showPassword1 ? "Hide password" : "Show password"}
+                width="24"
+                height="24"
+              />
+            </button>
           </div>
           <div className="control">
             <button type="submit" className="btn">Reset Password</button>

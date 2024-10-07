@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './Signup.css';
 import main from './pics2/main.jpg';
 import { Link, useNavigate } from 'react-router-dom';
+import eyeIcon from "../assets/eye.png"; 
+import eyeSlashIcon from "../assets/eye-2.png";
 
 function Signup() {
   const navigate = useNavigate();
@@ -17,6 +19,11 @@ function Signup() {
 
   const changeHandle = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const [showPassword, setShowPassword] = useState(false);
+  
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev); // Toggle the password visibility
   };
 
   const handleResetEmailChange = (e) => {
@@ -123,11 +130,23 @@ function Signup() {
                   name='password' 
                   value={formData.password} 
                   onChange={changeHandle} 
-                  type="password" 
+                  type={showPassword ? "text" : "password"}
                   placeholder="Password*" 
                   className="form-control" 
                   required 
                 />
+                <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="togglePasswordButton15"
+            >
+              <img
+                src={showPassword ? eyeSlashIcon : eyeIcon}
+                alt={showPassword ? "Hide password" : "Show password"}
+                width="24"
+                height="24"
+              />
+            </button>
               </div>
               <div className="form-group">
                 <label>

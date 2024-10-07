@@ -97,9 +97,9 @@ margin-bottom:20px;
     letter-spacing: 2px;
   }
   .blankCartContainer2 {
-    height: 550px;
-    margin-left: 10%;
-    width: 550px;
+    height: 650px;
+    /* margin-left: 10%; */
+    width: 650px;
     display: flex; /* Enable flexbox */
     flex-direction: column; /* Align items vertically */
     justify-content: center; /* Center vertically */
