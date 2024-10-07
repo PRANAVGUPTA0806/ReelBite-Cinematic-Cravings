@@ -49,7 +49,7 @@ const Login = () => {
         if (responseData.role === 'admin') {
           console.log("Admin login successful");
           alert("Welcome, Admin!");
-          navigate('/admin');
+          navigate('/home');
         } else {
           console.log("User login successful");
           alert("You are logged in... WELCOME TO ... !!");
