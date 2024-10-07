@@ -49,7 +49,7 @@ const Login = () => {
         if (responseData.role === 'admin') {
           console.log("Admin login successful");
           alert("Welcome, Admin!");
-          window.location.href = 'http://localhost:5173/';// Redirect to admin panel
+          navigate('/admin');
         } else {
           console.log("User login successful");
           alert("You are logged in... WELCOME TO ... !!");
