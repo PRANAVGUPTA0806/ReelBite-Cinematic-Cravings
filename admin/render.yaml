@@ -1,0 +1,11 @@
+version: 1
+services:
+  - type: web
+    name: reelbitecinematiccravings
+    env: node
+    buildCommand: npm run build
+    startCommand: npm run preview  # If you're serving the built files
+    autoDeploy: true
+    routes:
+      - src: /(.*)
+        dest: /index.html
