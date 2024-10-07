@@ -32,7 +32,7 @@ function AddtoCart() {
       console.error('No token found in localStorage');
       return;
     }
-    await fetch('http://localhost:8000/api/my-orders', {
+    await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/my-orders`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -35,7 +35,7 @@ function Signup() {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8000/api/user/register', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/register`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -64,7 +64,7 @@ function Signup() {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8000/api/user/forgot-password', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/forgot-password`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',

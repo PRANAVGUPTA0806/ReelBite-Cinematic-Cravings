@@ -31,7 +31,7 @@ const PasswordReset = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:8000/api/user/reset-password/${resetToken}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/reset-password/${resetToken}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

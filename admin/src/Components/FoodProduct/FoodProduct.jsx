@@ -34,7 +34,7 @@ const FoodProduct = () => {
         
     };
   const fetchInfo =async()=>{
-    await fetch('http://localhost:8000/api/foodproducts/all').then((res)=>res.json()).then((data)=>{
+    await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/foodproducts/all`).then((res)=>res.json()).then((data)=>{
       setAllProducts(data)
     });
   }
@@ -45,7 +45,7 @@ const FoodProduct = () => {
   
   
     try {
-      const response = await fetch('http://localhost:8000/api/foodproducts/del', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/foodproducts/del`, {
         method: 'DELETE',
         headers: {
           Accept: 'application/json',
@@ -81,7 +81,7 @@ const FoodProduct = () => {
 
   const saveProduct = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/foodproducts/edit', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/foodproducts/edit`, {
         method: 'PUT',
         headers: {
           Accept: 'application/json',

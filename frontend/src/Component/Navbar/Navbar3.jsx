@@ -22,7 +22,7 @@ const Navbar3 = ({quantityAdded})=>{
         return;
       }
             try {
-                const response = await fetch('http://localhost:8000/api/cart/',{
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/cart/`,{
                   method:'GET',
                   headers: {
                     'Content-Type': 'application/json',

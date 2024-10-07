@@ -35,7 +35,7 @@ const Food = ()=>{
 
     const fetchMovies = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/foodproducts/all');
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/foodproducts/all`);
         const data = await response.json();
         setMovieItems(data); // Store fetched movie data in state
       } catch (error) {
@@ -78,7 +78,7 @@ const Food = ()=>{
       return;
     }
     try {
-      const response = await fetch('http://localhost:8000/api/cart/add', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/cart/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

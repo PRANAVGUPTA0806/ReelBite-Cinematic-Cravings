@@ -35,7 +35,7 @@ const AddMovieProduct = () => {
             console.error('No token found in localStorage');
             return;
         }
-        await fetch('http://localhost:8000/upload/image',{
+        await fetch(`${process.env.REACT_APP_BACKEND_URL}/upload/image`,{
             method:'POST',
             headers:{
                 Accept:'application/json',
@@ -46,7 +46,7 @@ const AddMovieProduct = () => {
         if (responseData.success){
             product.image=responseData.image_url;
             console.log(product)
-            await fetch('http://localhost:8000/api/moviesproducts/',
+            await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/moviesproducts/`,
                 {
                     method:'POST',
                     headers:{

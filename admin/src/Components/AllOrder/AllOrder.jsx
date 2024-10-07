@@ -17,7 +17,7 @@ const AllOrder = () => {
       return;
     }
     
-    await fetch('http://localhost:8000/api/admin/orders', {
+    await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/admin/orders`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

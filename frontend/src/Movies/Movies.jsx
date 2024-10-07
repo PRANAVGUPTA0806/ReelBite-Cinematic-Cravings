@@ -33,7 +33,7 @@ const Movies = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/moviesproducts/all');
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/moviesproducts/all`);
         const data = await response.json();
         setMovieItems(data); // Store fetched movie data in state
       } catch (error) {
@@ -76,7 +76,7 @@ const Movies = () => {
       return;
     }
     try {
-      const response = await fetch('http://localhost:8000/api/cart/add', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/cart/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

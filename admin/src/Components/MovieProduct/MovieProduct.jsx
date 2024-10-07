@@ -33,7 +33,7 @@ const MovieProduct = () => {
         
     };
   const fetchInfo =async()=>{
-    await fetch('http://localhost:8000/api/moviesproducts/all').then((res)=>res.json()).then((data)=>{
+    await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/moviesproducts/all`).then((res)=>res.json()).then((data)=>{
       setAllProducts(data)
     });
   }
@@ -41,7 +41,7 @@ const MovieProduct = () => {
     fetchInfo();
   },[])
   const remove_product=async(product_id)=>{
-    await fetch('http://localhost:8000/api/moviesproducts/del',{
+    await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/moviesproducts/del`,{
       method:'DELETE',
       headers:{
         Accept:'application/json',
@@ -66,7 +66,7 @@ const MovieProduct = () => {
 
   const saveProduct = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/moviesproducts/edit', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/moviesproducts/edit`, {
         method: 'PUT',
         headers: {
           Accept: 'application/json',
