@@ -32,7 +32,7 @@ const AddFoodProduct = () => {
             return;
         }
 
-    await fetch(`${process.env.REACT_APP_BACKEND_URL}/upload/image`,{
+    await fetch(`${import.meta.env.VITE_BACKEND_URL}/upload/image`,{
         method:'POST',
         headers:{
             Accept:'application/json',
@@ -44,7 +44,7 @@ const AddFoodProduct = () => {
     if (responseData.success){
         product.image=responseData.image_url;
         console.log(product)
-        await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/foodproducts/`,
+        await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/foodproducts/`,
             {
                 method:'POST',
                 headers:{

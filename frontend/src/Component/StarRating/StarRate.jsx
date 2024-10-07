@@ -13,7 +13,7 @@ const StarRate = ({ userId, productId, productModel }) => {
       return;
     }
       try {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/rating/rating/${userId}/${productId}`);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/rating/rating/${userId}/${productId}`);
         const data = await response.json();
 
         if (data.success) {
@@ -31,7 +31,7 @@ const StarRate = ({ userId, productId, productModel }) => {
   
     
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/rating/save-rating`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/rating/save-rating`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

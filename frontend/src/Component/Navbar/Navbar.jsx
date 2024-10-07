@@ -23,7 +23,7 @@ const Navbar = ({ setSearchTerm,quantityAdded })=>{
         return;
       }
             try {
-                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/cart/`,{
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart/`,{
                   method:'GET',
                   headers: {
                     'Content-Type': 'application/json',

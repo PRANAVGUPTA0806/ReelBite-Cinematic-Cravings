@@ -41,7 +41,7 @@ function AddtoCart() {
     return;
   }
         try {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/cart/`,{
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart/`,{
               method:'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ const handleAddQuantity = async (productId) => {
   setQuantityAdd(false);
   const token = localStorage.getItem('auth-token');
   try {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/cart/add`, {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ const handleRemoveQuantity = async (productId) => {
   setQuantityAdd(false);
   const token = localStorage.getItem('auth-token');
   try {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/cart/remove`, {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart/remove`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ const handleRemoveQuantity = async (productId) => {
 const handledeleteQuantity = async (productId) => {
   const token = localStorage.getItem('auth-token');
   try {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/cart/remove1`, {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart/remove1`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

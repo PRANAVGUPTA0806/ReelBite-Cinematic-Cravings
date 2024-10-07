@@ -17,7 +17,7 @@ const AllOrder = () => {
       return;
     }
     
-    await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/admin/orders`, {
+    await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/admin/orders`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

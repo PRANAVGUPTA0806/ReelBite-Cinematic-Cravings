@@ -36,7 +36,7 @@ function Signup() {
     let responseData;
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/login`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/login`, {
         method: 'POST', 
         headers: {
           Accept: 'application/json',
@@ -74,7 +74,7 @@ function Signup() {
     event.preventDefault();
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/forgot-password`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/forgot-password`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
