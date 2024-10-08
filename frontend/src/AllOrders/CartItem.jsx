@@ -21,12 +21,14 @@ const CartItem = ({ item }) => {
             <span>Total: ${item.order_summary.totalPrice}</span>
             <div id="transactionInfo">
               <p>{item.payment_status}</p>
-              {item.transaction_id ? (
-                <p>Transaction ID: {item.transaction_id}</p>
+              {item.paymentID ? (
+                <p>Transaction ID: {item.paymentID}</p>
               ) : (
                 <p>No Transaction ID Available</p>
               )}
-              <p>Payment Method: {item.payment_method}</p>
+              <p>Payment Method: {item.paymentSource}</p>
+              <p>Email: {item.email_address}</p>
+              <p>Phone: {item.national_number}</p>
             </div>
             <span>Order Date: {new Date(item.updatedAt).toLocaleString()}</span>
           </div>

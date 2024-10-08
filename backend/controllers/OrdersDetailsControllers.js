@@ -4,14 +4,18 @@ const Order = require('../models/OrdersDetailModel');
 // Create a new order
 const createOrder = async (req, res) => {
   try {
-    const { order_summary,transaction_id,payment_method,payment_status} = req.body;
+    const { paymentSource,payment_status,payment_date,order_summary,paymentID,billing_information,email_address,national_number,} = req.body;
     
     const newOrder = new Order({
       userId: req.user._id, 
       order_summary,
-      transaction_id:transaction_id,
-      payment_method: payment_method,
+      paymentID:paymentID,
+      billing_address:billing_information,
+      email_address:email_address,
+      paymentSource: paymentSource,
+      national_number:national_number,
       payment_status:payment_status,
+      payment_date:payment_date,
     });
 
     const savedOrder = await newOrder.save();

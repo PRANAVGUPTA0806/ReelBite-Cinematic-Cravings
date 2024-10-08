@@ -50,7 +50,7 @@ const OrderSchema = new mongoose.Schema(
           payment_status: {
             type: String,
             enum: ['Pending', 'Paid', 'Failed'],
-            // required: true
+            default: 'Pending'
           },
           payment_date: {
             type: Date,
@@ -59,13 +59,31 @@ const OrderSchema = new mongoose.Schema(
         }
       ]
     },
-    payment_method: { type: String },
-    transaction_id: { type: String },
-    payment_status: {
+    // Billing Information
+   
+      billing_address: {
+        address_line_1: { type: String},
+        address_line_2: { type: String },
+        admin_area_1: { type: String},
+        admin_area_2: { type: String },
+        postal_code: { type: String },
+        country_code: { type: String },
+        // phone: { type: String, required: true } // Optionally add phone number to billing
+      },
+
+      
+    
+    email_address:{ type: String,default:"-"},
+    national_number: { type: String,default:"-"} ,
+    paymentSource: { type: String },
+    paymentID: { type: String },payment_status: {
       type: String,
-      enum: ['Pending', 'Paid', 'Failed'],
-      required: true
+      enum: ['Pending', 'COMPLETED', 'Failed'],
+      default: 'Pending'
     },
+    // Shipping Information
+    
+    // Order History for tracking status changes over time
     order_history: [
       {
         

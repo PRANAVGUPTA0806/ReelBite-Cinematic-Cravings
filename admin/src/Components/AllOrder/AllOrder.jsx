@@ -62,8 +62,11 @@ const AllOrder = () => {
             </div>
             <p>${order.order_summary.totalPrice}</p>
             <p>{order.payment_status}</p>
-            <p>{order.transaction_id || 'N/A'}</p>
-            <p>{order.payment_method}</p>
+            <p>{order.paymentID || 'N/A'}</p>
+            <p>Payment Method: {order.paymentSource}</p>
+            <p>Email: {order.email_address}</p>
+            {/* <p>{order.billing_address}</p> */}
+            <p>Phone: {order.national_number}</p>
             <p>{new Date(order.updatedAt).toLocaleString()}</p>
             <hr />
           </div>

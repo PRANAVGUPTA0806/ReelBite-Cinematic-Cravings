@@ -39,9 +39,9 @@ const CartFooter = ({ total ,cartItems}) => {
                 },
                 body: JSON.stringify({
                     order_summary: cartItems,
-                    transaction_id:"na",
-                    payment_method: "CASH",
-                    payment_status:"Paid", // Include order summary
+                    paymentID:"na",
+                    paymentSource: "CASH",
+                    payment_status:"COMPLETED", // Include order summary
                     // Add other necessary fields here, e.g., billing_information, shipping_information
                 }),
             });
@@ -77,7 +77,7 @@ const CartFooter = ({ total ,cartItems}) => {
     };
     
 
-    const handleApprove = async(orderId) => {
+    const handleApprove = async(order,data) => {
         
         const token = localStorage.getItem('auth-token'); // Retrieve the token
     
@@ -96,9 +96,13 @@ const CartFooter = ({ total ,cartItems}) => {
                 },
                 body: JSON.stringify({
                     order_summary: cartItems, 
-                    transaction_id:orderId,
-                    payment_method: "ONLINE",
-                    payment_status:"Paid",// Include order summary
+                    paymentID:data.paymentID,
+                    billing_information:order.payer.address,
+                    email_address:order.payer.email_address,
+                    national_number:order.payer.phone.phone_number.national_number,
+                    paymentSource: data.paymentSource,
+                    payment_status:order.status,
+                    payment_date:order.update_time,// Include order summary
                     // Add other necessary fields here, e.g., billing_information, shipping_information
                 }),
             });
@@ -149,8 +153,8 @@ const CartFooter = ({ total ,cartItems}) => {
                 },
                 body: JSON.stringify({
                     order_summary: cartItems,
-                    transaction_id: "", // No transaction ID since it was cancelled
-                    payment_method: "ONLINE",
+                    paymentID: "", // No transaction ID since it was cancelled
+                    paymentSource: "ONLINE",
                     payment_status: "Failed",
                 }),
             });
@@ -208,8 +212,9 @@ const CartFooter = ({ total ,cartItems}) => {
                                 }}
                                 onApprove={async (data, actions) => {
                                     const order = await actions.order.capture();
-                                    console.log("Order:", order);
-                                    handleApprove(data.orderID);
+                                    // console.log(data);
+                                    // console.log("Order:", order);
+                                    handleApprove(order,data);
                                 }}
                                 onCancel={() => {
                                     console.log("Payment cancelled by the user.");
