@@ -7,7 +7,7 @@ const Comment=({productId })=> {
   const [todos, setTodos] = useState([]);
 
   const fetchTasks = async () => {
-          const response = await fetch(`https://reelbitecinematiccravings1.onrender.com/tasks/${productId}`, {
+          const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/tasks/${productId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ const Comment=({productId })=> {
   }, []);
 
   const handler = async (text) => {
-          const response = await fetch(`https://reelbitecinematiccravings1.onrender.com/add`, {
+          const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/add`, {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const Comment=({productId })=> {
   };
 
   const deleteTask = async (todo) => {
-          const response = await fetch(`https://reelbitecinematiccravings1.onrender.com/delete`, {
+          const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/delete`, {
               method: 'DELETE',
               headers: {
                   'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ const Comment=({productId })=> {
   };
 
   const updateTask = async (todo) => {
-          const response = await fetch(`https://reelbitecinematiccravings1.onrender.com/update`, {
+          const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/update`, {
               method: 'PUT',
               headers: {
                   'Content-Type': 'application/json',

@@ -30,7 +30,7 @@ const Login = () => {
     let responseData;
 
     try {
-      const response = await fetch(`https://reelbitecinematiccravings1.onrender.com/api/user/login`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/login`, {
         method: 'POST', 
         headers: {
           Accept: 'application/json',
@@ -70,7 +70,7 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch(`https://reelbitecinematiccravings1.onrender.com/api/user/forgot-password`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/forgot-password`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',

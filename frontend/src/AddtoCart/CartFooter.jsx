@@ -31,7 +31,7 @@ const CartFooter = ({ total ,cartItems}) => {
     
         try {
             // Make a request to place the order first (similar to what you'd do for PayPal)
-            const response = await fetch(`https://reelbitecinematiccravings1.onrender.com/api/orders`, {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -50,7 +50,7 @@ const CartFooter = ({ total ,cartItems}) => {
                 console.log('Order placed successfully');
     
                 // Clear the cart after the order is saved
-                const clearCartResponse = await fetch(`https://reelbitecinematiccravings1.onrender.com/api/cart/clear`, {
+                const clearCartResponse = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart/clear`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
@@ -88,7 +88,7 @@ const CartFooter = ({ total ,cartItems}) => {
     
         try {
             // Make a request to place the order first (similar to what you'd do for PayPal)
-            const response = await fetch(`https://reelbitecinematiccravings1.onrender.com/api/orders`, {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -107,7 +107,7 @@ const CartFooter = ({ total ,cartItems}) => {
                 console.log('Order placed successfully');
     
                 // Clear the cart after the order is saved
-                const clearCartResponse = await fetch(`https://reelbitecinematiccravings1.onrender.com/api/cart/clear`, {
+                const clearCartResponse = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart/clear`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
@@ -141,7 +141,7 @@ const CartFooter = ({ total ,cartItems}) => {
         }
     
         try {
-            const response = await fetch(`https://reelbitecinematiccravings1.onrender.com/api/orders`, {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

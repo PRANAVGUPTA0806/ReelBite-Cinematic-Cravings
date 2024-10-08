@@ -31,7 +31,7 @@ const PasswordReset = () => {
     }
 
     try {
-      const response = await fetch(`https://reelbitecinematiccravings1.onrender.com/api/user/reset-password/${resetToken}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/reset-password/${resetToken}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

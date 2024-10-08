@@ -35,7 +35,7 @@ function Signup() {
     event.preventDefault();
 
     try {
-      const response = await fetch(`https://reelbitecinematiccravings1.onrender.com/api/user/register`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/register`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -64,7 +64,7 @@ function Signup() {
     event.preventDefault();
 
     try {
-      const response = await fetch(`https://reelbitecinematiccravings1.onrender.com/api/user/forgot-password`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/forgot-password`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',

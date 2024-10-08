@@ -22,7 +22,7 @@ const Navbar3 = ({quantityAdded})=>{
         return;
       }
             try {
-                const response = await fetch(`https://reelbitecinematiccravings1.onrender.com/api/cart/`,{
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart/`,{
                   method:'GET',
                   headers: {
                     'Content-Type': 'application/json',

@@ -72,7 +72,7 @@ function Contactus() {
             const formData = { fullName, email, message };
     
             try {
-                const response = await fetch(`https://reelbitecinematiccravings1.onrender.com/api/contact`, {
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/contact`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
