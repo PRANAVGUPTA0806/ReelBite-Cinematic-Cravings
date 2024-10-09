@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Movies.css'
 import blankproduct from "../assets/nov.png";
 import Navbar from '../Component/Navbar/Navbar';
@@ -24,13 +24,18 @@ function Footer134() {
   );
 }
 const Movies = () => {
+  const navigate=useNavigate();
   // const {addToCart, CartItems,handleItem,item} = useContext(MovieContext)
   const [movieItems, setMovieItems] = useState([]);
   const [searchTerm, setSearchTerm] = useState(''); 
   const [exitIntent, setExitIntent] = useState(false);
   const[quantityAdd,setQuantityAdd] = useState(false);
+  const handleProductClick = (productId) => {
+    navigate(`/product/${productId}`); // Use navigate to go to the product details page
+  };
 
   useEffect(() => {
+    
     const fetchMovies = async () => {
       try {
         const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/moviesproducts/all`);
@@ -108,15 +113,17 @@ const Movies = () => {
           {filteredMovies.length > 0 ? (
             filteredMovies.map((data, index) => (
               <div key={index} className='movieCardCont'>
-                <img className='movieCardImg' src={data.image} alt={data.name} />
-                <div className='movieCardRate'>
+                <img className='movieCardImg' src={data.image} alt={data.name}  onClick={() => handleProductClick(data._id)} // Navigate to the product details page on click
+                    style={{ cursor: "pointer" }} />
+                <div className='movieCardRate'  onClick={() => handleProductClick(data._id)} // Navigate to the product details page on click
+                    style={{ cursor: "pointer" }} >
                   <span>{data.productName}</span>
                   <StarRate userId={localStorage.getItem("id")} productId={data._id} productModel="movies"/>
                 </div>
                 <span>{data.category}</span><br />
                 <span>${data.productPrice}</span>
                 <button className='com' onClick={() => addToCart(data._id)}>Buy Tickets</button>
-                <Comment productId={data._id} />
+                {/* <Comment productId={data._id} /> */}
               </div>
             ))
           ) : (

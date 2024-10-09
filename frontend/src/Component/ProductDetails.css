@@ -1,0 +1,181 @@
+.product-details {
+    display: flex;
+    align-items: flex-start; /* Align items to the start */
+    padding: 20px;
+    color: aliceblue;
+    background-color: #282929;
+    max-width: auto; /* Adjust max-width as needed */
+    height: 100%;
+    margin: auto;
+   
+}
+
+.product-image {
+    flex: 1; /* Allow the image container to take up space */
+    margin-right: 20px; /* Space between image and details */
+}
+.pc {
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: auto; /* Prevent horizontal scrolling */
+    max-height: 400px; /* Set a suitable max-height for the comments area */
+    margin-right: 20px; /* Space between image and details */
+    padding: 10px; /* Optional: Add some padding */
+    border: 1px solid #ccc; /* Optional: Add a border for better visibility */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    max-width: 400px;
+}
+
+.product-image img {
+    max-width: 100%; /* Make image responsive */
+    /* height: 150%; Maintain aspect ratio */
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.product-info {
+    flex: 2; /* Allow the details container to take more space */
+    display: flex;
+    flex-direction: column; /* Stack text elements vertically */
+    justify-content: center; /* Center vertically if needed */
+}
+
+.product-info h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.product-info p {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+.productPriceContainer {
+    margin: 20px 0;
+}
+
+.productAddToCartButton {
+    margin-top: 10px;
+}
+
+.productAddToCartButton .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.productAddToCartButton .button:hover {
+    background-color: #ff6347; /* Adjusted hover color */
+}
+
+/* Loading State */
+.productAddToCartButton .button.loading {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+    .productAddToCartButton .button {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-details {
+        flex-direction: column; /* Stack image and details vertically on small screens */
+        align-items: center;
+    }
+
+    .product-image {
+        margin-right: 0; /* Remove margin for small screens */
+        margin-bottom: 20px; /* Space between image and details */
+    }
+
+    .product-info {
+        align-items: center; /* Center align info for small screens */
+    }
+
+    .product-info h2 {
+        font-size: 1.5rem;
+    }
+
+    .product-info p {
+        font-size: 0.9rem;
+    }
+
+    .productAddToCartButton .button {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-details {
+        padding: 5px;
+    }
+
+    .product-info h2 {
+        font-size: 1.2rem;
+    }
+
+    .product-info p {
+        font-size: 0.8rem;
+    }
+
+    .productAddToCartButton .button {
+        font-size: 0.8rem;
+        padding: 5px 8px;
+    }
+}
+
+.rrrrr {
+    background: var(--exDark);
+    color: black;
+    background-color: black;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.social-links333333 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.4rem;
+    background-color: black;
+}
+
+.social-links333333 a {
+    border: 2px solid #fff;
+    color: red;
+    display: block;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    text-decoration: none;
+    margin: 0 0.3rem;
+    transition: all 0.5s ease;
+}
+
+.social-links333333 a:hover {
+    background: #e20707;
+    color: var(--exDark);
+}
+
+.rrrrr span {
+    margin-top: 1rem;
+    display: block;
+    color: var(--exDark);
+    font-family: var(--Playfair);
+    letter-spacing: 2px;
+}

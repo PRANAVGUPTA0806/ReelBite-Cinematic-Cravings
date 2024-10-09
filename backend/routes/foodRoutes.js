@@ -15,7 +15,7 @@ router.get("/all", getProducts);
 router.post("/",isAdmin, createProducts);
 
 // Route for getting, updating, and deleting a product by ID
-router.get("/", getProductsById);
+router.get("/:id", getProductsById);
 router.put("/edit", updateProductsById);
 router.delete("/del", deleteProductsById);
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect,useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Food.css'
 import blankproduct from "../assets/nop.png";
 import Navbar1 from '../Component/Navbar1/Navbar1';
@@ -29,6 +29,10 @@ const Food = ()=>{
   const [exitIntent, setExitIntent] = useState(false);
   const [searchTerm, setSearchTerm] = useState(''); 
   const[quantityAdd,setQuantityAdd] = useState(false);
+  const navigate=useNavigate();
+  const handleProductClick = (productId) => {
+    navigate(`/product/${productId}`); // Use navigate to go to the product details page
+  };
 
 
   useEffect(() => {
@@ -111,15 +115,17 @@ const Food = ()=>{
           {filteredMovies.length > 0 ? (
             filteredMovies.map((data, index) => (
               <div key={index} className='movieCardCont'>
-                <img className='movieCardImg' src={data.image} alt={data.name} />
-                <div className='movieCardRate'>
+                <img className='movieCardImg' src={data.image} alt={data.name}  onClick={() => handleProductClick(data._id)} // Navigate to the product details page on click
+                    style={{ cursor: "pointer" }} />
+                <div className='movieCardRate'  onClick={() => handleProductClick(data._id)} // Navigate to the product details page on click
+                    style={{ cursor: "pointer" }} >
                   <span>{data.productName}</span>
                   <StarRate userId={localStorage.getItem("id")} productId={data._id} productModel="foods" />
                 </div>
                 {/* <span>{data.category}</span><br /> */}
                 <span>${data.productPrice}</span>
                 <button className='com' onClick={() => addToCart(data._id)}>Buy Food</button>
-                <Comment productId={data._id}/>
+                {/* <Comment productId={data._id}/> */}
               </div>
             ))
           ) : (

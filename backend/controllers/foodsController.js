@@ -67,9 +67,11 @@ const createProducts = asyncHandler(async (req, res) => {
 //@access private
 
 const getProductsById = asyncHandler(async (req, res) => {
-  const products = await allProductModel.findById(req.body.product_id);
+  const products = await allProductModel.findById(req.params.id);
+  // console.log(`Products fetched:`, products);
   if (!products) {
-    res.status(404);
+    // console.log(`Product not found: ${req.params.id}`);
+    res.status(400);
     throw new Error("Product Not Found");
   }
   res.status(200).json(products);

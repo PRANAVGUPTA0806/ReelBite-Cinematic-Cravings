@@ -13,6 +13,7 @@ import AddtoCart from './AddtoCart/AddtoCart';
 import AllOrders from './AllOrders/AddtoCart';
 import { MovieContextProvider } from './Context/MovieContext';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+import ProductDetails from './Component/ProductDetails';
 
 const App = () => {
   
@@ -35,6 +36,7 @@ const App = () => {
           <Route path='/movies' element={<Movies/>}/>
           <Route path='/food' element={<Food/>}/>
           <Route path='/addcart' element={<AddtoCart/>}/>
+          <Route path="/product/:productId" element={<ProductDetails />} />
           <Route path='/myorders' element={<AllOrders/>}/>
           <Route path="/reset-password/:resetToken" element={<PasswordReset />} />
         </Routes>
