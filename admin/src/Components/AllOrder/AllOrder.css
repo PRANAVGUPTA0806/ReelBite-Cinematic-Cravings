@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 99%;
     padding: 20px;
     margin: 30px auto;
     border-radius: 8px;
@@ -46,6 +46,13 @@
     font-size: 14px;
     border-bottom: 1px solid #ececec;
   }
+  
+  #listproduct-format p {
+    word-break: break-word; /* Ensures long words or text don't overflow */
+}
+  #order-details p {
+    word-break: break-word; /* Ensures long words or text don't overflow */
+}
   
   /* Scroll container for all orders */
   #listproduct-allproducts {

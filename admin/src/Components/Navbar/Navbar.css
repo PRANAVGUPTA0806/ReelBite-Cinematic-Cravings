@@ -1,32 +1,127 @@
-.navbar{
-    display:flex;
+/* Main Navbar styling */
+.navbar {
+    display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 15px 60px;
-    box-shadow: 0 1px 3px -2px #000;
-    margin-bottom: 1px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
     background-color: #05204A;
+    position: relative;
+    z-index: 100;
+    transition: padding 0.3s ease;
 }
 
-.nav-logo{
+/* Navbar logo */
+.nav-logo {
     width: 80px;
-}
-#btn2{
-    background: crimson;
+    transition: width 0.3s ease;
 }
 
-.nav-profile{
-    width:100px;
+/* Logout/Login button */
+#btn2 {
+    background-color: crimson;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-@media(max-width:800px){
-    .navbar{
+#btn2:hover {
+    background-color: #b22222;
+    transform: translateY(-2px);
+}
+
+/* Profile icon */
+.nav-profile {
+    width: 60px;
+    border-radius: 50%;
+    transition: width 0.3s ease;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .navbar {
+        padding: 15px 40px;
+    }
+    .nav-logo {
+        width: 70px;
+    }
+    .nav-profile {
+        width: 50px;
+    }
+    #btn2 {
+        font-size: 0.95rem;
+        padding: 8px 18px;
+    }
+}
+
+@media (max-width: 992px) {
+    .navbar {
         padding: 15px 30px;
     }
-    .nav-logo{
-        width: 65px;
+    .nav-logo {
+        width: 60px;
     }
-    .nav-profile{
-        width: 85px;
+    .nav-profile {
+        width: 45px;
+    }
+    #btn2 {
+        padding: 7px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 20px;
+    }
+    .nav-logo {
+        width: 55px;
+    }
+    .nav-profile {
+        width: 40px;
+    }
+    #btn2 {
+        padding: 6px 14px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 15px;
+    }
+    .nav-logo {
+        width: 50px;
+    }
+    .nav-profile {
+        width: 35px;
+        margin-top: 10px;
+    }
+    #btn2 {
+        padding: 5px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Mobile-first small screen adjustments */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 10px 10px;
+    }
+    .nav-logo {
+        width: 45px;
+    }
+    .nav-profile {
+        width: 30px;
+    }
+    #btn2 {
+        padding: 4px 10px;
+        font-size: 0.75rem;
     }
 }

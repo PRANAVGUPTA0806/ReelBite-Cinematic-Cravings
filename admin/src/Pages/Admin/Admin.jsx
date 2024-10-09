@@ -8,6 +8,19 @@ import AddFoodProduct from '../../Components/AddProduct/AddFoodProduct'
 import AddMovieProduct from '../../Components/AddProduct/AddMovieProduct'
 import AllOrder from '../../Components/AllOrder/AllOrder';
 
+function Footer1() {
+  return (
+    <footer>
+      <div className="social-links">
+        <a href="https://www.facebook.com/"><i className="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/LOGIN"><i className="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/"><i className="fab fa-instagram"></i></a>
+        <a href="https://in.pinterest.com/"><i className="fab fa-pinterest"></i></a>
+      </div>
+      <span style={{ color: "white" }}>ReelBite: Cinematic Cravings Admin's Page</span>
+    </footer>
+  );
+}
 const Admin = () => {
   return (
     <div className='admin'>
@@ -19,8 +32,7 @@ const Admin = () => {
         <Route path='foodproduct' element={<FoodProduct/>}/>
         <Route path='allorders' element={<AllOrder/>}/>
       </Routes>
-
-
+      <Footer1 />
     </div>
   )
 }
