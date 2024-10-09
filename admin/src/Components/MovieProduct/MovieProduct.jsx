@@ -33,7 +33,19 @@ const MovieProduct = () => {
         
     };
   const fetchInfo =async()=>{
-    await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/moviesproducts/all`).then((res)=>res.json()).then((data)=>{
+    const token = localStorage.getItem('auth-token'); // Retrieve the token
+    
+    if (!token) {
+      console.error('No token found in localStorage');
+      return;
+    }
+    await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/moviesproducts/all1`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Include token for authentication
+      },
+    }).then((res)=>res.json()).then((data)=>{
       setAllProducts(data)
     });
   }
