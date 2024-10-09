@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 99%;
+    width: 98%;
     padding: 20px;
     margin: 30px auto;
     border-radius: 8px;
@@ -56,7 +56,7 @@
   
   /* Scroll container for all orders */
   #listproduct-allproducts {
-    max-height: 500px;
+    max-height: 1500px;
     overflow-y: auto;
   }
   
