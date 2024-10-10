@@ -3,6 +3,7 @@ import './Navbar.css'
 import { Link, useNavigate } from 'react-router-dom';
 import navlogo from '/pp1.png'
 import navprofile from '../../assets/nav-profile.svg'
+import axios from "axios";
 
 const Navbar = () => {
   const navigate = useNavigate();
