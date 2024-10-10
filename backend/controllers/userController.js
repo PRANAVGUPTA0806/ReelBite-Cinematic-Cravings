@@ -82,6 +82,7 @@ const loginUser = asyncHandler(async (req, res) => {
       _id: user._id,
       username: user.username,
       email: user.email,
+      imageUrl: user.imageUrl,
       token,
       role:role1
     });

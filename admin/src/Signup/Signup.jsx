@@ -50,6 +50,8 @@ function Signup() {
       if (responseData.token && responseData.role === 'admin') {
         // if(responseData.role === 'user'){ // Check for successful login by token
         localStorage.setItem('auth-token', responseData.token);
+        localStorage.setItem('avatar', responseData.imageUrl|| "https://res.cloudinary.com/dwprhpk9r/image/upload/v1728546051/uploads/product_1728546048771.png.png"
+        );
         // }
         console.log("Login successful");
         alert("Welcome, Admin!");
