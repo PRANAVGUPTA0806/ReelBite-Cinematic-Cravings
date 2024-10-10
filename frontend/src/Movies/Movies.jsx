@@ -118,6 +118,8 @@ const Movies = () => {
                 <div className='movieCardRate'  onClick={() => handleProductClick(data._id)} // Navigate to the product details page on click
                     style={{ cursor: "pointer" }} >
                   <span>{data.productName}</span>
+                  </div>
+                <div className='movieCardRate' >
                   <StarRate userId={localStorage.getItem("id")} productId={data._id} productModel="movies"/>
                 </div>
                 <span>{data.category}</span><br />

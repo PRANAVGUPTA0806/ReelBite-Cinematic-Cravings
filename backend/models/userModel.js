@@ -16,6 +16,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add your password"],
     },
+    imageUrl:{
+      type: String,
+      default:"https://res.cloudinary.com/dwprhpk9r/image/upload/v1728546051/uploads/product_1728546048771.png.png",
+    },
     isAdmin: {
       type: Boolean,
       default: false,

@@ -23,6 +23,7 @@ function Header() {
           <Link to='/home'><img src={pp1} alt="logoimg" width="50" height="50" /></Link>
         </div>
         <ul className="nav-list">
+        <li><Link className="bollywood" to='/account' style={{ textDecoration: "None" }}>MyAccount</Link></li>
           <li><Link className="bollywood" to='/movies' style={{ textDecoration: "None" }}>Movies</Link></li>
           <li><Link className="Food" to='/food' style={{ textDecoration: "None" }}>Food</Link></li>
           <li><Link className="about"  style={{ textDecoration: "None" }} to='/about'  >About</Link> </li> 

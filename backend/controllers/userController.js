@@ -104,6 +104,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       _id: user._id,
       username: user.username,
       email: user.email,
+      imageUrl:user.imageUrl,
     });
   } else {
     res.status(404);
@@ -120,7 +121,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   if (user) {
     user.username = req.body.username || user.username;
     user.email = req.body.email || user.email;
-
+    user.imageUrl = req.body.avatar || user.imageUrl;
     if (req.body.password) {
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(req.body.password, salt);
@@ -130,13 +131,14 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
     // Generate new JWT token
     const token = jwt.sign({ id: updatedUser._id }, process.env.JWT_SECRET, {
-      expiresIn: "30m",
+      expiresIn: "1d",
     });
 
     res.json({
       _id: updatedUser._id,
       username: updatedUser.username,
       email: updatedUser.email,
+      imageUrl: updatedUser.imageUrl,
       token,
     });
   } else {

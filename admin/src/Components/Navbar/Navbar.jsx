@@ -11,7 +11,7 @@ const Navbar = () => {
       <Link to='/home'><img src={navlogo} alt="logo" className="nav-logo" /></Link>
           {localStorage.getItem('auth-token')?<button  id="btn2" onClick={()=>{localStorage.removeItem('auth-token');navigate('/')}}>Logout</button>
           :<Link  style={{ textDecoration: "None" }} id="btn2" className="btn btn-full" to='/login'>Log In</Link>}
-      <img src={navprofile} alt="logo" className="nav-profile" />
+     <Link to='/account'><img src={navprofile} alt="logo" className="nav-profile" /></Link> 
     </div>
   )
 }

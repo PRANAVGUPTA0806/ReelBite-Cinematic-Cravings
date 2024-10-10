@@ -5,6 +5,7 @@ import StarRate from '../Component/StarRating/StarRate';
 import Comment from '../Comments/Comment';
 import blankproduct from "../assets/nop.png";
 import './ProductDetails.css'
+import Navbar from './Navbar/Navbar';
 function Footer13444() {
     return (
       <footer className='rrrrr'>
@@ -27,7 +28,7 @@ const navigate =useNavigate();
   const [exitIntent, setExitIntent] = useState(false);
   const[quantityAdd,setQuantityAdd] = useState(false);
   const [loadingStates, setLoadingStates] = useState({});
-
+  
   const [expanded, setExpanded] = useState(false);
 
   const toggleDescription = () => {
@@ -126,7 +127,7 @@ const navigate =useNavigate();
 
   return (
     <>
-      <Navbar1 setSearchTerm="" quantityAdded={quantityAdd} />
+      <Navbar setSearchTerm="" quantityAdded={quantityAdd} />
       <div className="product-details">
         <div className="product-image">
           <img src={product.image} alt={product.productName} />

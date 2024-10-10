@@ -5,7 +5,7 @@ import Signup from './Signup/Signup';
 import About from './About/About';
 import Contactus from './Contantus/Contanctus';
 import Login from './Login/Login';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route,Navigate } from 'react-router-dom';
 import Movies from './Movies/Movies';
 import PasswordReset from './PasswordReset/PasswordReset';
 import Food from './Food/Food';
@@ -14,6 +14,9 @@ import AllOrders from './AllOrders/AddtoCart';
 import { MovieContextProvider } from './Context/MovieContext';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import ProductDetails from './Component/ProductDetails';
+import ErrorPage from './Component/ErrorPage';
+import ProtectedRoute from './Component/ProtectedRoute';
+import MyAccount from './Component/MyAccount';
 
 const App = () => {
   
@@ -28,7 +31,7 @@ const App = () => {
       <div>
         <Routes>
           <Route path='/' element={<Home1/>}/>
-          <Route path='/home' element={<Home/>}/>
+          <Route path='/home' element={<ProtectedRoute element={Home}/>}/>
           <Route path='/about' element={<About/>}/>
           <Route path='/contact' element={<Contactus/>}/>
           <Route path='/login' element={< Login/>}/>
@@ -36,9 +39,15 @@ const App = () => {
           <Route path='/movies' element={<Movies/>}/>
           <Route path='/food' element={<Food/>}/>
           <Route path='/addcart' element={<AddtoCart/>}/>
+          <Route
+          path="/account"
+          element={<ProtectedRoute element={MyAccount} />}
+          />
           <Route path="/product/:productId" element={<ProductDetails />} />
           <Route path='/myorders' element={<AllOrders/>}/>
           <Route path="/reset-password/:resetToken" element={<PasswordReset />} />
+          <Route path="error" element={<ErrorPage />} />
+          <Route path="*" element={<Navigate to="/error" />} />
         </Routes>
       </div>
      
