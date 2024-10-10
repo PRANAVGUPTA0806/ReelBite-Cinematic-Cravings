@@ -53,7 +53,7 @@ function Signup() {
         // }
         console.log("Login successful");
         alert("Welcome, Admin!");
-        navigate('/admin');
+        navigate('/admin/allorders');
        
   
       } else {
