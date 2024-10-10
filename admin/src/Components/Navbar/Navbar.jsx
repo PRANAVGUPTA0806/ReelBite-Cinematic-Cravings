@@ -9,7 +9,6 @@ const Navbar = () => {
   useEffect(() => {
     const storedToken = localStorage.getItem("auth-token");
     if (storedToken) {
-      setToken(storedToken);
       axios
         .get(`${import.meta.env.VITE_BACKEND_URL}/api/user/profile`, {
           headers: { Authorization: `Bearer ${storedToken}` },
