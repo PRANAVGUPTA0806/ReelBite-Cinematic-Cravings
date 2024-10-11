@@ -129,25 +129,29 @@ const ProductDetails = () => {
               <p>Description: {product.productDescription}</p>
             )}
             <p>Category: {product.category ? product.category : "Food"}</p>
-            <p>In Stock: {product.available ? "Yes" : "No"}</p>
+            <p>Available: {product.available ? "Yes" : "No"}</p>
             <div className="productPriceContainer">
               <StarRate userId={localStorage.getItem("id")} productId={product._id} productModel="allProducts"/>
             </div>
-            <div className="productAddToCartButton">
-              <button
-                className={loadingStates[product._id] ? "button loading" : "button"}
-                onClick={() => handleClick(product)}
-                disabled={loadingStates[product._id]}
-              >
-                <span>Add to cart</span>
-                <div className="cart">
-                  <svg viewBox="0 0 36 26">
-                    <polyline points="1 2.5 6 2.5 10 18.5 25.5 18.5 28.5 7.5 7.5 7.5"></polyline>
-                    <polyline points="15 13.5 17 15.5 22 10.5"></polyline>
-                  </svg>
-                </div>
-              </button>
-            </div>
+            {product.available ? ( // Render button only if product is available
+              <div className="productAddToCartButton">
+                <button
+                  className={loadingStates[product._id] ? "button loading" : "button"}
+                  onClick={() => handleClick(product)}
+                  disabled={loadingStates[product._id]}
+                >
+                  <span>Add to cart</span>
+                  <div className="cart">
+                    <svg viewBox="0 0 36 26">
+                      <polyline points="1 2.5 6 2.5 10 18.5 25.5 18.5 28.5 7.5 7.5 7.5"></polyline>
+                      <polyline points="15 13.5 17 15.5 22 10.5"></polyline>
+                    </svg>
+                  </div>
+                </button>
+              </div>
+            ) : (
+              <p style={{ color: 'red' }}>This product is currently unavailable.</p>
+            )}
           </div>
           <div className='pc'>
             Reviews <br />

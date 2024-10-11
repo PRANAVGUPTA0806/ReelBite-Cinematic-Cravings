@@ -44,7 +44,7 @@ const FoodProduct = () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // Include token for authentication
+        'Authorization': `Bearer ${localStorage.getItem('auth-token')}`
       },
     }).then((res)=>res.json()).then((data)=>{
       setAllProducts(data)
@@ -62,6 +62,7 @@ const FoodProduct = () => {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('auth-token')}`
         },
         body: JSON.stringify({ product_id }), // Shortened object syntax
       });
@@ -98,6 +99,7 @@ const FoodProduct = () => {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('auth-token')}`
         },
         body: JSON.stringify(currentProduct),
       });

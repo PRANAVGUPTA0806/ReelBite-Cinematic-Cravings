@@ -43,7 +43,7 @@ const MovieProduct = () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // Include token for authentication
+        'Authorization': `Bearer ${localStorage.getItem('auth-token')}` // Include token for authentication
       },
     }).then((res)=>res.json()).then((data)=>{
       setAllProducts(data)
@@ -58,6 +58,7 @@ const MovieProduct = () => {
       headers:{
         Accept:'application/json',
         'Content-Type':'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('auth-token')}`
       },
       body:JSON.stringify({product_id:product_id})
     })
@@ -83,6 +84,7 @@ const MovieProduct = () => {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('auth-token')}`
         },
         body: JSON.stringify(currentProduct),
       });
