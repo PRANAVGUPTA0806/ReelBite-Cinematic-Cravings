@@ -11,6 +11,13 @@
     box-sizing: border-box;
     flex-wrap: wrap; /* Allow wrapping of items if needed */
 }
+.loadf{
+    background-color: #282929;
+    max-width: 100vw;
+    color: aliceblue;
+    justify-content: center;
+    height: 100vh;
+}
 
 /* Image container */
 .product-image {
@@ -76,7 +83,22 @@
     background-color: #ccc;
     cursor: not-allowed;
 }
+.blankCartContainer21 {
+    height: 650px;
+    background-color: #282929;
+    /* margin-left: 10%; */
+    width: 100%;
+    display: flex; /* Enable flexbox */
+    flex-direction: column; /* Align items vertically */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+}
 
+.blankCartContainer21 img {
+    max-width: 100%; /* Ensure the image is responsive */
+    height: 650px; /* Maintain aspect ratio */
+    width:650px;
+}
 /* Reviews container */
 .pc {
     margin-top: 20px;
