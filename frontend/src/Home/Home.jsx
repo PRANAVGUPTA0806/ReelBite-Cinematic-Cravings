@@ -23,13 +23,15 @@ function Header() {
           <Link to='/home'><img src={pp1} alt="logoimg" width="50" height="50" /></Link>
         </div>
         <ul className="nav-list">
-        <li><Link className="bollywood" to='/account' style={{ textDecoration: "None" }}>MyAccount</Link></li>
+       
           <li><Link className="bollywood" to='/movies' style={{ textDecoration: "None" }}>Movies</Link></li>
           <li><Link className="Food" to='/food' style={{ textDecoration: "None" }}>Food</Link></li>
           <li><Link className="about"  style={{ textDecoration: "None" }} to='/about'  >About</Link> </li> 
           <li><Link className="Contactus"  style={{ textDecoration: "none" }} to='/contact'>Contact Us</Link></li>
+          <li><Link className="bollywood" to='/account' style={{ textDecoration: "None" }}>MyAccount</Link></li>
           {localStorage.getItem('auth-token')?<button  id="btn1" onClick={()=>{localStorage.removeItem('auth-token');localStorage.removeItem('id');localStorage.removeItem('avatar');window.location.replace('/')}}>Logout</button>
           :<Link  style={{ textDecoration: "None" }} id="btn1" className="btn btn-full" to='/login'>Log In</Link>}
+
           {/* <li><Link  style={{ textDecoration: "None" }} id="btn1" className="btn btn-full" to='/login'>Log In</Link></li> */}
         </ul>
       </div>

@@ -11,6 +11,11 @@
     background-repeat: no-repeat;
     background-position: center;
   }
+  .nav-profile {
+    width: 30px;
+    border-radius: 50%;
+    transition: width 0.3s ease;
+}
   .navigationBar {
     max-width: 1180px;
     margin: 0 ;
