@@ -7,6 +7,7 @@ import FoodProduct from '../../Components/FoodProduct/FoodProduct'
 import AddFoodProduct from '../../Components/AddProduct/AddFoodProduct'
 import AddMovieProduct from '../../Components/AddProduct/AddMovieProduct'
 import AllOrder from '../../Components/AllOrder/AllOrder';
+import AllUser from '../../Components/AllUser/AllUser'
 
 function Footer1() {
   return (
@@ -31,6 +32,7 @@ const Admin = () => {
         <Route path='movieproduct' element={<MovieProduct/>}/>
         <Route path='foodproduct' element={<FoodProduct/>}/>
         <Route path='allorders' element={<AllOrder/>}/>
+        <Route path='allusers' element={<AllUser/>}/>
       </Routes>
       <Footer1 />
     </div>

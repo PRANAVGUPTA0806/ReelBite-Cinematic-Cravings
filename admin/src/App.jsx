@@ -13,6 +13,7 @@ import AllOrder from './Components/AllOrder/AllOrder';
 import ProtectedRoute from './Pages/ProtectedRoute';
 import ErrorPage from './Pages/ErrorPage';
 import MyAccount from './Pages/MyAccount';
+import AllUser from './Components/AllUser/AllUser';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
             <Route path='movieproduct' element={<MovieProduct/>}/>
             <Route path='foodproduct' element={<FoodProduct/>}/>
             <Route path='allorders' element={<AllOrder/>}/>
+            <Route path='allusers' element={<AllUser/>}/>
           </Route>
           <Route path='/login' element={<Signup/>}/>
           <Route path="error" element={<ErrorPage />} />

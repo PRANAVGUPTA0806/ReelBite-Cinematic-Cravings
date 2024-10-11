@@ -24,7 +24,7 @@ function Header() {
         </div>
         <ul className="nav-list">
           <li><Link className="bollywood" to='/admin/allorders' style={{ textDecoration: "None" }}>DashBoard</Link></li>
-          {localStorage.getItem('auth-token')?<button  id="btn1" onClick={()=>{localStorage.removeItem('auth-token');window.location.replace('/')}}>Logout</button>
+          {localStorage.getItem('auth-token')?<button  id="btn1" onClick={()=>{localStorage.removeItem('auth-token');localStorage.removeItem('avatar');window.location.replace('/')}}>Logout</button>
           :<Link  style={{ textDecoration: "None" }} id="btn1" className="btn btn-full" to='/login'>Log In</Link>}
           </ul>
       </div>

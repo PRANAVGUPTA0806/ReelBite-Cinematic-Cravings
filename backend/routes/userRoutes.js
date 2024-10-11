@@ -9,10 +9,10 @@ const {
   getUserProfile,
   updateUserProfile,
   resetPassword,
-  requestPasswordReset,
+  requestPasswordReset,getAllUsers,updateUserByAdmin,deleteUserByAdmin,restoreUserByAdmin,
 } = require("../controllers/userController");
 
-const { protect } = require("../middleware/authMiddleware");
+const { protect, isAdmin } = require("../middleware/authMiddleware");
 
 // Route for user registration
 router.post("/register", registerUser);
@@ -25,6 +25,11 @@ router.get("/profile", protect, getUserProfile);
 
 // Route for updating the user profile
 router.put("/profile", protect, updateUserProfile);
+router.delete('/delete-user/:userId', isAdmin, deleteUserByAdmin);
+
+router.get("/all-users",isAdmin, getAllUsers); // Route to get all users by only admin
+router.put("/update-admin/:id", isAdmin, updateUserByAdmin); 
+router.put('/restore-user/:userId', isAdmin, restoreUserByAdmin);
 
 // Route for requesting password reset
 router.post('/forgot-password', requestPasswordReset);

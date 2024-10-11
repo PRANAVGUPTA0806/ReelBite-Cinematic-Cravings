@@ -21,7 +21,7 @@ const Header1 = () => {
               <Link className="bollywood"  style={{ textDecoration: "none", color:"#F4FEFC" }} to='/movies'>Movies</Link>
               <Link className="Food"  style={{ textDecoration: "none", color:"#F4FEFC" }} to='/food'>Food</Link>
               <Link  style={{ textDecoration: "none", color:"#F4FEFC" }} to='/contact'>Contact Us</Link>
-              {localStorage.getItem('auth-token')?<button  className="btn btn-full" id="btn1" onClick={()=>{localStorage.removeItem('auth-token');window.location.replace('/about')}}>Logout</button>
+              {localStorage.getItem('auth-token')?<button  className="btn btn-full" id="btn1" onClick={()=>{localStorage.removeItem('auth-token');localStorage.removeItem('avatar');window.location.replace('/about')}}>Logout</button>
           :<Link  style={{ textDecoration: "None" }} id="btn1" className="btn btn-full" to='/login'>Log In</Link>}
             </div>
           </div>

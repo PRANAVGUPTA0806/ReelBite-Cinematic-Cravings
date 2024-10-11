@@ -85,7 +85,7 @@ const Navbar = ({ setSearchTerm,quantityAdded })=>{
                         
                     </div>
                     <div className='basket'>{total1}</div>
-                    {localStorage.getItem('auth-token')?<button  id="btn1" onClick={()=>{localStorage.removeItem('id');localStorage.removeItem('auth-token');window.location.replace('/movies')}}>Logout</button>
+                    {localStorage.getItem('auth-token')?<button  id="btn1" onClick={()=>{localStorage.removeItem('id');localStorage.removeItem('auth-token');localStorage.removeItem('avatar');window.location.replace('/movies')}}>Logout</button>
           :<Link  style={{ textDecoration: "None" }} id="btn1" className="btn btn-full" to='/login'>Log In</Link>}
                 </div>
             </div>

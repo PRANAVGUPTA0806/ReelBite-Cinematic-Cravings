@@ -27,7 +27,8 @@ const CartItem = ({ item }) => {
                 <p>No Transaction ID Available</p>
               )}
               <p>Payment Method: {item.paymentSource}</p>
-              <p>Email: {item.email_address}</p>
+              
+            <p> Email: {item.email_address!=='-' ? item.email_address : item.userId.email}</p>
               <p>Phone: {item.national_number}</p>
             </div>
             <span>Order Date: {new Date(item.updatedAt).toLocaleString()}</span>

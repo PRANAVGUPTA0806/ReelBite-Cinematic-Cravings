@@ -16,6 +16,15 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add your password"],
     },
+    userStatus: {
+      type: String,
+      enum: ['Active', 'Suspended', 'Deactivated'], // Enum for user status
+      default: 'Active',
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
     imageUrl:{
       type: String,
       default:"https://res.cloudinary.com/dwprhpk9r/image/upload/v1728546051/uploads/product_1728546048771.png.png",

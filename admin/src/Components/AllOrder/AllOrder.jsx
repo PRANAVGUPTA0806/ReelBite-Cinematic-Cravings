@@ -44,6 +44,9 @@ const AllOrder = () => {
         <p>Payment Status</p>
         <p>Transaction ID</p>
         <p>Payment Method</p>
+        <p>UserID</p>
+        <p>Email</p>
+        <p>Address/PhoneNo.</p>
         <p>Order Date & Time</p>
       </div>
       <div id="listproduct-allproducts">
@@ -64,11 +67,35 @@ const AllOrder = () => {
             <p>{order.payment_status}</p>
             <p>{order.paymentID || 'N/A'}</p>
             <p>Payment Method: {order.paymentSource}</p>
-            <p>Email: {order.email_address}</p>
+            <p>UserID: {order.userId._id}</p>
+            <p> Email: {order.email_address!=='-' ? order.email_address : order.userId.email}</p>
             {/* <p>{order.billing_address}</p> */}
+            
+            {order.billing_address && (
+        <>
+          {order.billing_address.address_line_1 && (
+            <p>Address Line 1: {order.billing_address.address_line_1}</p>
+          )}
+          {order.billing_address.address_line_2 && (
+            <p>Address Line 2: {order.billing_address.address_line_2}</p>
+          )}
+          {order.billing_address.admin_area_2 && (
+            <p>City/Area: {order.billing_address.admin_area_2}</p>
+          )}
+          {order.billing_address.admin_area_1 && (
+            <p>State/Region: {order.billing_address.admin_area_1}</p>
+          )}
+          {order.billing_address.postal_code && (
+            <p>Postal Code: {order.billing_address.postal_code}</p>
+          )}
+          {order.billing_address.country_code && (
+            <p>Country Code: {order.billing_address.country_code}</p>
+          )}
+        </>
+      )}
             <p>Phone: {order.national_number}</p>
             <p>{new Date(order.updatedAt).toLocaleString()}</p>
-            <hr />
+            {/* <hr /> */}
           </div>
         ))}
       </div>

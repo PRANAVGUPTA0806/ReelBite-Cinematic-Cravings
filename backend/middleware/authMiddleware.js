@@ -20,6 +20,10 @@ const protect = asyncHandler(async (req, res, next) => {
       // Get user from the token
       req.user = await User.findById(decoded.id).select("-password");
 
+      if (req.user && req.user.isDeleted) {
+        return res.status(403).json({ message: "Your account has been deleted." });
+      }
+
       next();
     } catch (error) {
       console.error(error);
@@ -50,6 +54,10 @@ const isAdmin = asyncHandler(async (req, res, next) => {
 
       // Get user from the token
       req.user = await User.findById(decoded.id).select("-password");
+
+      if (req.user && req.user.isDeleted) {
+        return res.status(403).json({ message: "Your account has been deleted." });
+      }
       // Check if the user is an admin
       if (req.user && req.user.isAdmin) {
         next();

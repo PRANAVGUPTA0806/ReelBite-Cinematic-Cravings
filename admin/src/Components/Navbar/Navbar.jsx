@@ -28,7 +28,7 @@ const Navbar = () => {
   return (
     <div className='navbar'>
       <Link to='/home'><img src={navlogo} alt="logo" className="nav-logo" /></Link>
-          {localStorage.getItem('auth-token')?<button  id="btn2" onClick={()=>{localStorage.removeItem('auth-token');navigate('/')}}>Logout</button>
+          {localStorage.getItem('auth-token')?<button  id="btn2" onClick={()=>{localStorage.removeItem('auth-token');localStorage.removeItem('avatar');navigate('/')}}>Logout</button>
           :<Link  style={{ textDecoration: "None" }} id="btn2" className="btn btn-full" to='/login'>Log In</Link>}
      <Link to='/account'><img src={localStorage.getItem('avatar')} alt="logo" className="nav-profile" /></Link> 
     </div>

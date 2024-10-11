@@ -49,6 +49,7 @@ function Signup() {
       if (responseData._id) {
         localStorage.setItem('auth-token', responseData.token);
         localStorage.setItem('id', responseData._id);
+        localStorage.setItem('avatar', responseData.imageUrl|| "https://res.cloudinary.com/dwprhpk9r/image/upload/v1728546051/uploads/product_1728546048771.png.png"),
         alert("You are signed up... WELCOME TO ... !!");
         navigate('/home');
       } else {

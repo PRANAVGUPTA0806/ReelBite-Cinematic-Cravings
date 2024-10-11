@@ -121,7 +121,7 @@ const MovieProduct = () => {
         <hr />
         {allproducts.map((product,index)=>{
           return <><div key={index} className="listproduct-format-main listproduct-format">
-            <img src={product.image} alt="" className="listproduct-product-icon" />
+            <img src={product.image} alt="" className="listproduct-product-icon" style={{ width: '150px', height: '90px' }}/>
             <p>{product.productName}</p>
             <p>${product.productPrice}</p>
             <p>{product.category}</p>

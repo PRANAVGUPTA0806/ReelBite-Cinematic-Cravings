@@ -45,6 +45,7 @@ const Login = () => {
         
         localStorage.setItem('auth-token', responseData.token);
         localStorage.setItem('id', responseData._id);
+        localStorage.setItem('avatar', responseData.imageUrl|| "https://res.cloudinary.com/dwprhpk9r/image/upload/v1728546051/uploads/product_1728546048771.png.png"),
         console.log("Login successful");
         if (responseData.role === 'admin') {
           console.log("Admin login successful");
