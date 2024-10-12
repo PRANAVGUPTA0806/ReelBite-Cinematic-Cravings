@@ -86,7 +86,7 @@ const Navbar1 = ({ setSearchTerm,quantityAdded })=>{
                     <li><Link to='/account' ><img src={localStorage.getItem('avatar')?localStorage.getItem('avatar'):"https://res.cloudinary.com/dwprhpk9r/image/upload/v1728546051/uploads/product_1728546048771.png.png"} alt="logo" className="nav-profile" /></Link> </li>
                     </div>
                     {localStorage.getItem('auth-token')?<button  id="btn1" onClick={()=>{localStorage.removeItem('auth-token');localStorage.removeItem('avatar');localStorage.removeItem('id');window.location.replace('/food')}}>Logout</button>
-          :<Link  style={{ textDecoration: "None" }} id="btn1" className="btn btn-full" to='/login'>Log In</Link>}
+          :<Link  style={{ textDecoration: "None" }} id="btn1" className="btn btn-full" to='/login'>Login</Link>}
                 </div>
             </div>
         </div>

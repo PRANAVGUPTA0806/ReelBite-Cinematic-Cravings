@@ -61,8 +61,8 @@ const Navbar3 = ({quantityAdded})=>{
           :<li><Link  style={{ textDecoration: "None" }}   to='/'>Home</Link></li>}
                         <li><Link to='/movies' style={{ textDecoration: "None" }}>Movies</Link></li>
                         <li><Link to='/food' style={{ textDecoration: "None" }}>Food</Link></li>
-                        <li><Link to='/contact' style={{ textDecoration: "None" }}>Contact Us</Link></li>
-                        <li><Link to='/myorders' style={{ textDecoration: "None" }}>All Orders</Link></li>
+                        <li><Link to='/contact' style={{ textDecoration: "None" }}>ContactUs</Link></li>
+                        <li><Link to='/myorders' style={{ textDecoration: "None" }}>Orders</Link></li>
                     </ul>
                 </div>
                 <div className="NavSearchdiv">
@@ -81,7 +81,7 @@ const Navbar3 = ({quantityAdded})=>{
                     </div>
                     
                     {localStorage.getItem('auth-token')?<button  id="btn1" onClick={()=>{localStorage.removeItem('auth-token');localStorage.removeItem('id');localStorage.removeItem('avatar');window.location.replace('/addcart')}}>Logout</button>
-          :<Link  style={{ textDecoration: "None" }} id="btn1" className="btn btn-full" to='/login'>Log In</Link>}
+          :<Link  style={{ textDecoration: "None" }} id="btn1" className="btn btn-full" to='/login'>Login</Link>}
                 </div>
             </div>
         </div>

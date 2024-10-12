@@ -124,9 +124,9 @@ const Movies = () => {
                 </div>
                 <span>{data.category}</span><br />
                 <span>${data.productPrice}</span>
-                <span>Available: {data.available ? "Yes" : "No"}</span>
+                <span>Available: {data.available ? "Yes" : "No"}  </span>
                 {data.available ? ( // Render button only if product is available
-              <button className='com' onClick={() => addToCart(data._id)}>Buy Food</button>
+              <button className='com' onClick={() => addToCart(data._id)}>Buy Tickets</button>
             ) : (
               <p style={{ color: 'red' }}>This product is currently unavailable.</p>
             )}

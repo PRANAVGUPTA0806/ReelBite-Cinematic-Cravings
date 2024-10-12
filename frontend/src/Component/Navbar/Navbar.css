@@ -1,172 +1,213 @@
-.Navwrapper{
-    height:11vh;
-    width:100%;
-    background-color:#05204A
+.Navwrapper {
+    height: 10vh;
+    width: 100%;
+    background-color: #05204A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.Navcontainer{
-    display:flex;
-    width:100%;
-    height:100%;
+.Navcontainer {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    align-items: center;
+    justify-content: space-between;
 }
-.basket{
-    background-color: red;
-    margin-bottom: 2px;
-    height: 20px;
-    width: 20px;
-    top: 29%;
-    margin-top: 11px;
-    margin-right: 4px;
-    z-index: 9999;
-    border-radius: 30%;
+
+.Navlogodiv {
+    display: flex;
+    align-items: center;
 }
-.Navlogodiv{
-    width:25%;
-    /* border:1px solid pink; */
-    height:100%;
-    max-width: 300px;
-    display:flex;
-   
-}
-.Navlogotext{
-    flex:2;
-    /* width:25%; */
-    height:100%;
-    display:flex;
+
+.Navlogotext {
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    /* margin-Left:10px; */
+    margin-left: 10px;
 }
 
-.Navlogodiv span{
-    font-size:14px;
-    font-weight: 900;  
-    color:white;
+.Navlogodiv span {
+    font-size: 16px;
+    font-weight: 900;
+    color: white;
     cursor: pointer;
 }
 
-.Navlogoimg{
-    flex:1;
-  
-   
+.Navlogoimg img {
+    cursor: pointer;
+    width: 48px;
+    height: auto;
+}
+
+.Navheaderdiv ul {
     display: flex;
-    justify-content: center;
-    
-    width:100%;
-    height:100%;
-}
-
-.Navlogoimg img{
-   margin-top:10px;
-   cursor: pointer;
-    width:50px;
-    max-width: 100%;
-    height:48px
-}
-
-.Navheaderdiv{
-    width:50%;
-    /* border:1px solid white; */
-    max-width: 500px;
-    
-   
-}
-
-.Navheaderdiv ul{
-    margin-top:20px;
-    width:100%;
-    /* border: 1px solid orange; */
-    text-decoration: none;
-    display: flex;
+    align-items: center;
     list-style-type: none;
-    justify-content: center;
-    /* justify-content: space-between; */
-    /* gap:1; */
-    margin-right: 20px;
-    margin-left:20px;
-    
+    padding: 0;
+    margin: 0;
 }
-.Navheaderdiv li{
-    color:#F4FEFC;
-    text-decoration: none;
 
-    display: flex;
-    /* width:100px; */
-    margin-right: 40px;
-    font-size: 18x;
+.Navheaderdiv li {
+    margin-right: 25px;
+    color: #F4FEFC;
+    font-size: 18px;
     font-weight: 500;
-    /* border: 1px solid red; */
     cursor: pointer;
+    text-decoration: none;
+}
 
-     &:active{
-        text-decoration: none;
-     }
-    
+.Navheaderdiv li a {
+    text-decoration: none;
+    color: #F4FEFC;
 }
-.NavSearchdiv{
-    /* border:1px solid orchid; */
-    width:25%;
-    height:100%;
+
+.NavSearchdiv {
     display: flex;
-    /* justify-content: center; */
+    align-items: center;
 }
-.cart1{
-    margin-top:22px;
-    margin-left:40px;
-    cursor: pointer;
-}
-.NavSearchcont{
-    margin-top:20px;
-    /* border:1px solid white; */
-    width: 100%;
-    /* max-width: 300px; */
-    height:26px;
+
+.NavSearchcont {
     display: flex;
-    border-radius: 10px;
+    align-items: center;
     background-color: #F4FEFC;
+    border-radius: 20px;
+    padding: 5px 10px;
 }
-.NavSearchcont input{
-    
+
+.NavSearchcont input {
+    border: none;
+    background: none;
     outline: none;
-    /* width:100%; */
-    height:100%;
     width: 100%;
-    max-width: 300px;
-    border:none;
-    border-radius: 10px;
-    background: transparent;
-    cursor: pointer;
-    margin-left:5px;
-}
-.NavSearchcont span{
-    cursor: pointer;
-    width:30px;
+    padding-left: 5px;
+    font-size: 16px;
 }
 
+.NavSearchcont span {
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 5px;
+}
 
+.cart1 {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.basket {
+    background-color: red;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin-top: 12px; */
+    margin-right: 5px;
+}
+
+.nav-profile {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+#btn1 {
+    margin-left: 20px;
+    padding: 8px 16px;
+    margin-top: 15px;
+    background-color: #F4FEFC;
+    color: #05204A;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#btn1:hover {
+    background-color: #fff;
+    color: #05204A;
+    transition: 0.3s;
+}
+
+/* Responsive design for tablets and below */
 @media only screen and (max-width: 768px) {
-    .Navlogodiv,
-    .Navheaderdiv,
-    .NavSearchdiv {
-        width: 100%;
-        max-width: none;
-    }
-
-    .Navlogodiv {
-        justify-content: center;
-    }
-
-    .Navlogotext {
-        margin-left: 10px;
-        text-align: left;
+    .Navcontainer {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .Navheaderdiv ul {
-        justify-content: flex-start;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 10px;
     }
 
     .Navheaderdiv li {
-        margin-right: 10px;
         margin-bottom: 10px;
+        margin-right: 0;
+    }
+
+    .NavSearchdiv {
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 10px;
+    }
+
+    .NavSearchcont {
+        width: 100%;
+    }
+
+    .cart1 {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .nav-profile {
+        margin-top: 10px;
+    }
+
+    #btn1 {
+        margin-top: 10px;
+    }
+}
+
+/* Responsive design for mobile */
+@media only screen and (max-width: 480px) {
+    .Navlogodiv {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .Navlogotext {
+        text-align: center;
+    }
+
+    .Navheaderdiv ul {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .NavSearchdiv {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .NavSearchcont input {
+        font-size: 14px;
+    }
+
+    .NavSearchcont span {
+        font-size: 16px;
+    }
+
+    .basket {
+        margin-left: 10px;
     }
 }
