@@ -4,13 +4,13 @@ Welcome to "Reel Bite: Cinematic Cravings": It is a cutting-edge ecommerce onlin
 
 # ReelBite-Cinematic-Cravings Admin Panel URL:
 
-# https://reelbitecinematiccravings.onrender.com
+https://reelbitecinematiccravings.onrender.com
 
 # ReelBite-Cinematic-Cravings Backend URL:
 
-# https://reelbitecinematiccravings1.onrender.com
+https://reelbitecinematiccravings1.onrender.com
 
 
 # ReelBite-Cinematic-Cravings Frontend URL:
 
-# https://reelbite-cinematic-cravings.onrender.com
+https://reelbite-cinematic-cravings.onrender.com
