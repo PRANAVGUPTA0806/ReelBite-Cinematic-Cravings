@@ -7,8 +7,12 @@ import movie from './pics5/movieticket.jpg'
 import './Exit19.css'
 import { movieitems } from '../Data';
 import Comment from '../Comments/Comment'
+import { ToastContainer, toast } from "react-toastify";
+import { PulseLoader } from "react-spinners";
+import "react-toastify/dist/ReactToastify.css";
 import StarRate from '../Component/StarRating/StarRate';
 import { MovieContext } from '../Context/MovieContext'; 
+
 
 function Footer134() {
   return (
@@ -30,6 +34,7 @@ const Movies = () => {
   const [searchTerm, setSearchTerm] = useState(''); 
   const [exitIntent, setExitIntent] = useState(false);
   const[quantityAdd,setQuantityAdd] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const handleProductClick = (productId) => {
     navigate(`/product/${productId}`); // Use navigate to go to the product details page
   };
@@ -77,7 +82,8 @@ const Movies = () => {
     setQuantityAdd(false);
     const t=localStorage.getItem('auth-token');
     if(!t){
-      alert('Failed to add Movie to cart:Login/Signup first');
+      toast.error('Failed to add Movie to cart:Login/Signup first');
+      
       return;
     }
     try {
@@ -91,15 +97,18 @@ const Movies = () => {
       });
 
       if (!response.ok) {
+        toast.error('Failed to add item to cart');
         throw new Error('Failed to add item to cart');
       }
 
       const data = await response.json();
       setQuantityAdd(true);
-      alert('Movie added to cart successfully!');
+      toast.success('Movie added to cart successfully!');
+    
     } catch (error) {
       console.error('Error adding product to cart:', error);
-      alert('Failed to add movie to cart:Login/Signup first');
+      toast.error('Error adding product to cart');
+      
     }
     
   };
@@ -151,6 +160,7 @@ const Movies = () => {
         <button id='continue-button'onClick={handleClosePopup}>Continue</button>
       </div>
       </div>
+      <ToastContainer />
     </>
   )
 }

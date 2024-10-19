@@ -9,6 +9,9 @@ import { fooditems } from '../Data';
 import Comment from '../Comments/Comment'
 import StarRate from '../Component/StarRating/StarRate';
 import { MovieContext } from '../Context/MovieContext';
+import { ToastContainer, toast } from "react-toastify";
+import { PulseLoader } from "react-spinners";
+import "react-toastify/dist/ReactToastify.css";
 
 function Footer1343() {
     return (
@@ -28,6 +31,7 @@ const Food = ()=>{
   const [movieItems, setMovieItems] = useState([]);
   const [exitIntent, setExitIntent] = useState(false);
   const [searchTerm, setSearchTerm] = useState(''); 
+  const [isLoading, setIsLoading] = useState(false);
   const[quantityAdd,setQuantityAdd] = useState(false);
   const navigate=useNavigate();
   const handleProductClick = (productId) => {
@@ -80,7 +84,7 @@ const Food = ()=>{
     setQuantityAdd(false);
     const t=localStorage.getItem('auth-token');
     if(!t){
-      alert('Failed to add Food to cart:Login/Signup first');
+      toast.error('Failed to add Food to cart:Login/Signup first');
       return;
     }
     try {
@@ -94,15 +98,16 @@ const Food = ()=>{
       });
 
       if (!response.ok) {
+        toast.error('Failed to add item to cart');
         throw new Error('Failed to add item to cart');
       }
 
       const data = await response.json();
       setQuantityAdd(true);
-      alert('Food item added to cart successfully!');
+      toast.success('Food item added to cart successfully!');
     } catch (error) {
       console.error('Error adding product to cart:', error);
-      alert('Failed to add Food to cart:Login/Signup first');
+      toast.error('Error adding product to cart');
     }
   };
 
@@ -154,6 +159,7 @@ const Food = ()=>{
         <button id='continue-button'onClick={handleClosePopup}>Continue</button>
       </div>
         </div>
+        <ToastContainer />
         </>
     )
 }

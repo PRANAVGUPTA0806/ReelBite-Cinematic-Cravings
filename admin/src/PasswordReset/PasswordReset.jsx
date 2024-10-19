@@ -5,13 +5,15 @@ import eyeIcon from "../assets/eye.png";
 import eyeSlashIcon from "../assets/eye-2.png";
 import eyeIcon1 from "../assets/eye1.png"; 
 import eyeSlashIcon1 from "../assets/eye-21.png";
+import { ToastContainer, toast } from "react-toastify";
+import { PulseLoader } from "react-spinners";
+import "react-toastify/dist/ReactToastify.css";
 
 const PasswordReset = () => {
   const { resetToken } = useParams(); // Extract resetToken from URL params
   const [newPassword, setNewPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
@@ -21,16 +23,22 @@ const PasswordReset = () => {
   const togglePasswordVisibility1= () => {
     setShowPassword1((prev) => !prev); // Toggle the password visibility
   };
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   const handlePasswordReset = async (e) => {
     e.preventDefault();
+    if (!passwordRegex.test(newPassword)) {
+      toast.error("Password must be at least 8 characters, include an uppercase, lowercase, number, and special character.");
+      return;
+    }
 
     if (newPassword !== confirmPassword) {
-      setErrorMessage("Passwords don't match");
+      toast.error("Passwords don't match");
       return;
     }
 
     try {
+      setIsLoading(true);
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/reset-password/${resetToken}`, {
         method: 'PATCH',
         headers: {
@@ -40,23 +48,19 @@ const PasswordReset = () => {
       });
 
       const data = await response.json();
-
+      setIsLoading(false);
       if (data.success) {
-        setSuccessMessage('Password reset successfully. Redirecting to login...');
-
-        alert(JSON.stringify({successMessage}));
+        toast.success('Password reset successfully. Redirecting to login...');
         setTimeout(() => {
           navigate('/login'); // Redirect to login page after a delay
         }, 1000);
       } else {
-        setErrorMessage(data.message || 'Error resetting password');
-        alert(JSON.stringify(({errorMessage})));
+        toast.error(data.message || 'Error resetting password');
 
       }
     } catch (error) {
-      setErrorMessage('An error occurred while resetting the password');
-      alert(JSON.stringify(({errorMessage})));
-
+      setIsLoading(false);
+      toast.error('An error occurred while resetting the password');
     }
   };
 
@@ -84,7 +88,7 @@ const PasswordReset = () => {
               className="togglePasswordButton14"
             >
               <img
-                src={showPassword ? eyeSlashIcon : eyeIcon}
+                src={showPassword ? eyeIcon:eyeSlashIcon }
                 alt={showPassword ? "Hide password" : "Show password"}
                 width="24"
                 height="24"
@@ -107,7 +111,7 @@ const PasswordReset = () => {
               className="togglePasswordButton1"
             >
               <img
-                src={showPassword1 ? eyeSlashIcon1 : eyeIcon1}
+                src={showPassword1 ? eyeIcon1:eyeSlashIcon1 }
                 alt={showPassword1 ? "Hide password" : "Show password"}
                 width="24"
                 height="24"
@@ -115,11 +119,23 @@ const PasswordReset = () => {
             </button>
           </div>
           <div className="control">
-            <button type="submit" className="btn">Reset Password</button>
+          {isLoading ? (
+                  <PulseLoader color="#36d7b7" loading={isLoading} size={10} />
+                ) : (
+                  <button type="submit" className="btn" disabled={isLoading}>
+                  {isLoading ? (
+                    <PulseLoader color="#fff" size={10} />
+                  ) :
+                    "Reset Password"
+                  }
+                </button>
+                )}
           </div>
           
         </form>
       </div>
+      
+      <ToastContainer />
     </section>
   );
 };

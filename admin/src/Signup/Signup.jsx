@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './Signup.css';
 import main from './pics2/main.jpg';
 import { Link, useNavigate } from 'react-router-dom';
 import eyeIcon from "../assets/eye.png"; 
 import eyeSlashIcon from "../assets/eye-2.png";
+import Cookies from "js-cookie"; 
+import { ToastContainer, toast } from "react-toastify";
+import { PulseLoader } from "react-spinners";
+import "react-toastify/dist/ReactToastify.css";
 
 function Signup() {
   const navigate = useNavigate();
@@ -11,15 +15,24 @@ function Signup() {
   const [isLoginFormVisible, setLoginFormVisible] = useState(true);
   const [isLostPasswordFormVisible, setLostPasswordFormVisible] = useState(false);
 
+  
+  const [resetEmail, setResetEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [formData, setFormData] = useState({
-    email: "",
+    email: email,
     password: ""
   });
-  const [resetEmail, setResetEmail] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false); 
   const changeHandle = (e) => {
+    const { name, value } = e.target;
+
+  if (name === 'email') {
+    setEmail(value); // Only update the email state if the input name is "email"
+  }
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const [showPassword, setShowPassword] = useState(false);
   
   const togglePasswordVisibility = () => {
@@ -29,6 +42,19 @@ function Signup() {
   const handleResetEmailChange = (e) => {
     setResetEmail(e.target.value);
   };
+  useEffect(() => {
+    // Check if the user email is stored in cookies when the component mounts
+    const savedEmail = Cookies.get("email");
+    // const savedpass = Cookies.get("password");
+    if (savedEmail ) {
+      setEmail(savedEmail); // Auto-fill the email field
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        email: savedEmail, // Correctly update the 'email' field in formData
+      }))
+      setRememberMe(true); // Set Remember Me to true
+    }
+  }, []);
 
   const login = async (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
@@ -36,36 +62,51 @@ function Signup() {
     let responseData;
 
     try {
+      setIsLoading(true);
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/login`, {
         method: 'POST', 
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json' 
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData,rememberMe),
       });
 
       responseData = await response.json();
+      setIsLoading(false);
 
       if (responseData.token && responseData.role === 'admin') {
         // if(responseData.role === 'user'){ // Check for successful login by token
         localStorage.setItem('auth-token', responseData.token);
         localStorage.setItem('avatar', responseData.imageUrl|| "https://res.cloudinary.com/dwprhpk9r/image/upload/v1728546051/uploads/product_1728546048771.png.png"
         );
+        if (rememberMe) {
+          Cookies.set("email", email, { expires: 7 }); // Store the email in cookies for 7 days
+          // Cookies.set("password", password, { expires: 7 });
+        } else {
+          Cookies.remove("email"); // Remove the email from cookies if not remembering
+          // Cookies.remove("password");
+        }
         // }
         console.log("Login successful");
-        alert("Welcome, Admin!");
-        navigate('/admin/allorders');
+        toast.success("Welcome, Admin!")
+        setTimeout(() => {
+          navigate('/admin/allorders');
+        
+      }, 2000);
+        
        
   
       } else {
+        setIsLoading(false);
         console.log(responseData.error);
-        alert("Login failed, please try again. " + responseData.error);
+        toast.error("Login failed, please try again. " + responseData.error);
       }
 
     } catch (error) {
+      setIsLoading(false);
       console.error("Error during login:", error);
-      alert("An error occurred during login.");
+      toast.error("An error occurred during login.");
     }
   };
 
@@ -76,6 +117,7 @@ function Signup() {
     event.preventDefault();
 
     try {
+      setIsLoading(true);
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/forgot-password`, {
         method: 'POST',
         headers: {
@@ -86,17 +128,22 @@ function Signup() {
       });
 
       const responseData = await response.json();
-
+      setIsLoading(false);
       if (responseData.success) {
-        alert("Password reset link sent to your email.");
-        navigate('/');
+        toast.success("Password reset link sent!");
+        setTimeout(() => {
+          
+          navigate('/');
         setLostPasswordFormVisible(false);
+      }, 2000);
       } else {
-        alert("Failed to send password reset link. " + responseData.error);
+        setIsLoading(false);
+        toast.error("Failed to send password reset link. " + responseData.message);
       }
     } catch (error) {
       console.error("Error during password reset request:", error);
-      alert("An error occurred while requesting password reset.");
+      setIsLoading(false);
+       toast.error("An error occurred while requesting password reset.");
     }
   };
 
@@ -119,8 +166,8 @@ function Signup() {
               <div className="form-group">
                 <input 
                   name='email' 
-                  value={formData.email} 
-                  onChange={changeHandle} 
+                  value={email} 
+                  onChange={changeHandle}
                   type="email" 
                   placeholder="Email Address*" 
                   className="form-control" 
@@ -143,7 +190,7 @@ function Signup() {
               className="togglePasswordButton15"
             >
               <img
-                src={showPassword ? eyeSlashIcon : eyeIcon}
+                src={showPassword ?eyeIcon: eyeSlashIcon }
                 alt={showPassword ? "Hide password" : "Show password"}
                 width="24"
                 height="24"
@@ -152,10 +199,21 @@ function Signup() {
               </div>
               <div className="form-group">
                 <label>
-                  <input type="checkbox" /> Remember Me
+                  <input type="checkbox" checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}/> Remember Me
                 </label>
               </div>
-              <button type="submit" className="submit-btn">Login</button>
+              {isLoading ? (
+                  <PulseLoader color="#36d7b7" loading={isLoading} size={10} />
+                ) : (
+                  <button type="submit" className="submit-btn" disabled={isLoading}>
+                  {isLoading ? (
+                    <PulseLoader color="#fff" size={10} />
+                  ) :
+                    "Login"
+                  }
+                </button>
+                )}
               <p>
                 <a href="#" className="lost-pass-btn" onClick={() => toggleForm('lostPassword')}>Lost Your Password?</a>
               </p>
@@ -178,7 +236,17 @@ function Signup() {
                   required 
                 />
               </div>
-              <button type="submit" className="submit-btn">Reset</button>
+              {isLoading ? (
+                  <PulseLoader color="#36d7b7" loading={isLoading} size={10} />
+                ) : (
+                  <button type="submit" className="submit-btn" disabled={isLoading}>
+                  {isLoading ? (
+                    <PulseLoader color="#fff" size={10} />
+                  ) :
+                    "Reset"
+                  }
+                </button>
+                )}
               <p>
                 <Link to='/login' className="login-btn" onClick={() => toggleForm('login')}>Log in</Link>
               </p>
@@ -186,6 +254,7 @@ function Signup() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

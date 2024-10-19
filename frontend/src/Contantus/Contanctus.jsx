@@ -3,9 +3,13 @@ import './Contactus.css';
 import './Exit2.css';
 import movie from './pics4/movie.jpg';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
+import { PulseLoader } from "react-spinners";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function Contactus() {
+    const [isLoading, setIsLoading] = useState(false);
     const [exitIntent, setExitIntent] = useState(false);
 
   useEffect(() => {
@@ -65,9 +69,34 @@ function Contactus() {
         const [fullName, setFullName] = useState('');
         const [email, setEmail] = useState('');
         const [message, setMessage] = useState('');
+
+        const validateForm = () => {
+            const nameRegex = /^[a-zA-Z0-9_]{3,20}$/;// Only letters and spaces
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Email validation
+            const messageRegex = /^.{5,500}$/; // Any character, between 1 and 500 characters
     
+            if (!nameRegex.test(fullName)) {
+                toast.error('Name must be between 3-20 characters and can only contain letters, numbers, and underscores.');
+                return false;
+            }
+    
+            if (!emailRegex.test(email)) {
+                toast.error('Please enter a valid email address.');
+                return false;
+            }
+    
+            if (!messageRegex.test(message)) {
+                toast.error('Message must be between 5 and 500 characters long.');
+                return false;
+            }
+    
+            return true;
+        };
+
         const handleSubmit = async (e) => {
             e.preventDefault();
+
+            if (!validateForm()) return;
             
             const formData = { fullName, email, message };
     
@@ -82,17 +111,17 @@ function Contactus() {
     
                 const result = await response.json();
                 if (response.ok) {
-                    alert('Your issue is submitted. Thank you!');
+                    toast.success('Your feedback is submitted. Thank you!')
                     // Optionally, reset the form fields
                     setFullName('');
                     setEmail('');
                     setMessage('');
                 } else {
-                    alert('Error: ' + result.message);
+                    toast.error('Error: ' + result.message);
                 }
             } catch (error) {
                 console.error('Error submitting the form:', error);
-                alert('Error submitting the form');
+                toast.error('Error submitting the form');
             }
         };
     
@@ -183,6 +212,7 @@ function Contactus() {
         <br />
         <button id='continue-button'onClick={handleClosePopup}>Continue</button>
       </div>
+      <ToastContainer />
         </div>
     );
 }

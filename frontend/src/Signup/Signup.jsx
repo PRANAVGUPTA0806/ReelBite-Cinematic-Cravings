@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import './Signup.css';
 import main from './pics2/main.jpg';
 import { Link, useNavigate } from 'react-router-dom';
 import eyeIcon from "../assets/eye.png"; 
 import eyeSlashIcon from "../assets/eye-2.png";
+import { ToastContainer, toast } from "react-toastify";
+import { PulseLoader } from "react-spinners";
+import "react-toastify/dist/ReactToastify.css";
 
 function Signup() {
   const navigate = useNavigate();
 
   const [isLoginFormVisible, setLoginFormVisible] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isLostPasswordFormVisible, setLostPasswordFormVisible] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -17,6 +21,9 @@ function Signup() {
     password: ""
   });
   const [showPassword, setShowPassword] = useState(false);
+  const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev); // Toggle the password visibility
@@ -33,8 +40,23 @@ function Signup() {
 
   const signin1 = async (event) => {
     event.preventDefault();
+    if (!usernameRegex.test(formData.username)) {
+      toast.error("Username must be between 3-20 characters and can only contain letters, numbers, and underscores.");
+      return;
+    }
+
+  if (!emailRegex.test(formData.email)) {
+    toast.error("Please enter a valid email address.");
+    return;
+  }
+    // Validate password
+    if (!passwordRegex.test(formData.password)) {
+      toast.error("Password must be at least 8 characters, include an uppercase, lowercase, number, and special character.");
+      return;
+    }
 
     try {
+      setIsLoading(true);
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/register`, {
         method: 'POST',
         headers: {
@@ -45,19 +67,27 @@ function Signup() {
       });
 
       const responseData = await response.json();
+      setIsLoading(false);
 
       if (responseData._id) {
         localStorage.setItem('auth-token', responseData.token);
         localStorage.setItem('id', responseData._id);
-        localStorage.setItem('avatar', responseData.imageUrl|| "https://res.cloudinary.com/dwprhpk9r/image/upload/v1728546051/uploads/product_1728546048771.png.png"),
-        alert("You are signed up... WELCOME TO ... !!");
-        navigate('/home');
+        localStorage.setItem('avatar', responseData.imageUrl|| "https://res.cloudinary.com/dwprhpk9r/image/upload/v1728546051/uploads/product_1728546048771.png.png");
+      
+        toast.success("You are signed up... WELCOME TO ... !!");
+        setTimeout(() => {
+            navigate('/home');
+          
+        }, 2000);
       } else {
-        alert("Signup failed, please try again. " + responseData.error);
+        setIsLoading(false);
+        toast.error("Signup failed, please try again. " + responseData.error);
       }
     } catch (error) {
+      setIsLoading(false);
+      toast.error("An error occurred during signup." + error);
+     
       console.error("Error during signup:", error);
-      alert("An error occurred during signup.");
     }
   };
 
@@ -65,6 +95,7 @@ function Signup() {
     event.preventDefault();
 
     try {
+      setIsLoading(true);
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/forgot-password`, {
         method: 'POST',
         headers: {
@@ -75,17 +106,21 @@ function Signup() {
       });
 
       const responseData = await response.json();
+      setIsLoading(false);
 
       if (responseData.success) {
-        alert("Password reset link sent to your email.");
-        navigate('/login');
-        setLostPasswordFormVisible(false);
+        
+        toast.success('Password reset successfully. Redirecting to login...');
+        setTimeout(() => {
+          navigate('/login'); // Redirect to login page after a delay
+        }, 1000);
       } else {
-        alert("Failed to send password reset link. " + responseData.error);
+        toast.error(data.message || 'Error resetting password');
+
       }
     } catch (error) {
-      console.error("Error during password reset request:", error);
-      alert("An error occurred while requesting password reset.");
+      setIsLoading(false);
+      toast.error('An error occurred while resetting the password');
     }
   };
 
@@ -143,19 +178,25 @@ function Signup() {
               className="togglePasswordButton"
             >
               <img
-                src={showPassword ? eyeSlashIcon : eyeIcon}
+                src={showPassword ? eyeIcon : eyeSlashIcon}
                 alt={showPassword ? "Hide password" : "Show password"}
                 width="24"
                 height="24"
               />
             </button>
               </div>
-              <div className="form-group">
-                <label>
-                  <input type="checkbox" /> Remember Me
-                </label>
-              </div>
-              <button type="submit" className="submit-btn">Sign Up</button>
+              
+              {isLoading ? (
+                  <PulseLoader color="#36d7b7" loading={isLoading} size={10} />
+                ) : (
+                  <button type="submit" className="submit-btn" disabled={isLoading}>
+                  {isLoading ? (
+                    <PulseLoader color="#fff" size={10} />
+                  ) :
+                    "Sign Up"
+                  }
+                </button>
+                )}
               <p>
                 <Link to='/login' className="register-btn" onClick={() => toggleForm('login')}>Log in</Link> | 
                 <a href="#" className="lost-pass-btn" onClick={() => toggleForm('lostPassword')}>Lost Your Password?</a>
@@ -179,7 +220,17 @@ function Signup() {
                   required 
                 />
               </div>
-              <button type="submit" className="submit-btn">Reset</button>
+              {isLoading ? (
+                  <PulseLoader color="#36d7b7" loading={isLoading} size={10} />
+                ) : (
+                  <button type="submit" className="submit-btn" disabled={isLoading}>
+                  {isLoading ? (
+                    <PulseLoader color="#fff" size={10} />
+                  ) :
+                    "Reset"
+                  }
+                </button>
+                )}
               <p>
                 <Link to='/login' className="login-btn" onClick={() => toggleForm('login')}>Log in</Link>
               </p>
@@ -187,6 +238,7 @@ function Signup() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

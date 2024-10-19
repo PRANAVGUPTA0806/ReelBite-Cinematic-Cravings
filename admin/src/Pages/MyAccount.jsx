@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./MyAccount.module.css";
 import Navbar from '../Components/Navbar/Navbar'
+import { ToastContainer, toast } from "react-toastify";
+import { PulseLoader } from "react-spinners";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function Footer1343() {
@@ -91,12 +94,12 @@ function MyAccount() {
         )
         .then((response) => {
           setEditMode(false);
-          alert("Profile updated successfully!"); // Success message
+          toast.success("Profile updated successfully!"); // Success message
           localStorage.setItem("avatar", response.data.imageUrl);
         })
         .catch((error) => {
           console.error("Error updating profile:", error);
-          alert("Error updating profile."); // Error message
+          toast.error("Error updating profile."); // Error message
         });
     }
   };
@@ -131,10 +134,10 @@ function MyAccount() {
           ...prevDetails,
           avatar: response.data.image_url,
         }));
-        alert("Avatar uploaded successfully!"); // Success message
+        toast.success("Avatar uploaded successfully!"); // Success message
       } catch (error) {
         console.error("Error uploading avatar:", error);
-        alert("Error uploading avatar."); // Error message
+        toast.error("Error uploading avatar.");  // Error message
       } finally {
         setLoading(false); // Stop loader
       }
@@ -207,6 +210,7 @@ function MyAccount() {
       </div>
     </div>
     <Footer1343/>
+    <ToastContainer/>
     </>
   );
 }

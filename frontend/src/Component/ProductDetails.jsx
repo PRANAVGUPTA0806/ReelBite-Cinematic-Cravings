@@ -5,6 +5,9 @@ import StarRate from '../Component/StarRating/StarRate';
 import Comment from '../Comments/Comment';
 import blankproduct from "../assets/nop.png";
 import './ProductDetails.css';
+import { ToastContainer, toast } from "react-toastify";
+import { PulseLoader } from "react-spinners";
+import "react-toastify/dist/ReactToastify.css";
 
 function Footer13444() {
   return (
@@ -25,14 +28,14 @@ const ProductDetails = () => {
   const { productId } = useParams(); // Extract productId from the URL
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [quantityAdd, setQuantityAdd] = useState(false);
   const [loadingStates, setLoadingStates] = useState({});
 
   const handleClick = (product) => {
     const token = localStorage.getItem("auth-token");
     if (!token) {
-      alert("Login/Signup first"); // Show the alert
-      navigate("/login"); // Redirect to the login page
+      toast.error("Login/Signup first"); // Show the alert
       return;
     }
     setLoadingStates((prevStates) => ({
@@ -53,7 +56,7 @@ const ProductDetails = () => {
     setQuantityAdd(false);
     const t = localStorage.getItem('auth-token');
     if (!t) {
-      alert('Failed to add Movie to cart:Login/Signup first');
+      toast.error("Login/Signup first"); // Show the alert
       return;
     }
     try {
@@ -67,14 +70,15 @@ const ProductDetails = () => {
       });
 
       if (!response.ok) {
+        toast.error('Failed to add item to cart');
         throw new Error('Failed to add item to cart');
       }
 
       setQuantityAdd(true);
-      alert('Movie added to cart successfully!');
+      toast.success('Item added to cart successfully!');
     } catch (error) {
       console.error('Error adding product to cart:', error);
-      alert('Failed to add movie to cart:Login/Signup first');
+      toast.error('Error adding product to cart');
     }
   };
 
@@ -161,6 +165,7 @@ const ProductDetails = () => {
         </div>
       )}
       <Footer13444 />
+      <ToastContainer />
     </>
   );
 };
