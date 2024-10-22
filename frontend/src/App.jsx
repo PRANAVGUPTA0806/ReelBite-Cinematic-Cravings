@@ -17,6 +17,7 @@ import ProductDetails from './Component/ProductDetails';
 import ErrorPage from './Component/ErrorPage';
 import ProtectedRoute from './Component/ProtectedRoute';
 import MyAccount from './Component/MyAccount';
+import ProtectedRoute1 from './Component/ProtectedRoute1';
 
 const App = () => {
   
@@ -34,8 +35,8 @@ const App = () => {
           <Route path='/home' element={<ProtectedRoute element={Home}/>}/>
           <Route path='/about' element={<About/>}/>
           <Route path='/contact' element={<Contactus/>}/>
-          <Route path='/login' element={< Login/>}/>
-          <Route path='/sign' element={<Signup/>}/>
+          <Route path='/login' element={<ProtectedRoute1 element={Login}/>}/>
+          <Route path='/sign' element={<ProtectedRoute1 element={Signup}/>}/>
           <Route path='/movies' element={<Movies/>}/>
           <Route path='/food' element={<Food/>}/>
           <Route path='/addcart' element={<AddtoCart/>}/>
@@ -45,7 +46,7 @@ const App = () => {
           />
           <Route path="/product/:productId" element={<ProductDetails />} />
           <Route path='/myorders' element={<AllOrders/>}/>
-          <Route path="/reset-password/:resetToken" element={<PasswordReset />} />
+          <Route path="/reset-password/:resetToken" element={<ProtectedRoute1 element={PasswordReset}/>} />
           <Route path="error" element={<ErrorPage />} />
           <Route path="*" element={<Navigate to="/error" />} />
         </Routes>

@@ -14,6 +14,7 @@ import ProtectedRoute from './Pages/ProtectedRoute';
 import ErrorPage from './Pages/ErrorPage';
 import MyAccount from './Pages/MyAccount';
 import AllUser from './Components/AllUser/AllUser';
+import ProtectedRoute1 from './Pages/ProtectedRoute1';
 
 function App() {
 
@@ -30,14 +31,14 @@ function App() {
             <Route path='allorders' element={<AllOrder/>}/>
             <Route path='allusers' element={<AllUser/>}/>
           </Route>
-          <Route path='/login' element={<Signup/>}/>
+          <Route path='/login' element={<ProtectedRoute1 element={Signup}/>}/>
           <Route path="error" element={<ErrorPage />} />
           <Route
           path="/account"
           element={<ProtectedRoute element={MyAccount} />}
           />
           <Route path="*" element={<Navigate to="/error" />} />
-          <Route path="/reset-password/:resetToken" element={<PasswordReset />} />
+          <Route path="/reset-password/:resetToken" element={<ProtectedRoute1 element={PasswordReset}/>} />
           
         </Routes>
       
