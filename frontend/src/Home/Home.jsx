@@ -215,7 +215,7 @@ const Home = () => {
   };
 
   return (
-      <div className="App">
+      <div className="App1">
       <Header/>
       <MainSection1/>
       <BlogSection2/>

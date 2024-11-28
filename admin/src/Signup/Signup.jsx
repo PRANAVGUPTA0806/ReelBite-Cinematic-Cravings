@@ -75,10 +75,11 @@ function Signup() {
       responseData = await response.json();
       setIsLoading(false);
 
-      if (responseData.token && responseData.role === 'admin') {
+      if (responseData.token ) {
+        if( responseData.role === 'admin'){
         // if(responseData.role === 'user'){ // Check for successful login by token
         localStorage.setItem('auth-token', responseData.token);
-        localStorage.setItem("role",responseData.role );
+        // localStorage.setItem("role",responseData.role );
         localStorage.setItem('avatar', responseData.imageUrl|| "https://res.cloudinary.com/dwprhpk9r/image/upload/v1728546051/uploads/product_1728546048771.png.png"
         );
         if (rememberMe) {
@@ -96,13 +97,21 @@ function Signup() {
         
       }, 2000);
         
-       
+    }else{
+      setIsLoading(false);
+      // console.log(responseData.error);
+      toast.error("Unauthorized: User is not an admin." );
+
+    }
   
-      } else {
-        setIsLoading(false);
-        console.log(responseData.error);
-        toast.error("Login failed, please try again. " + responseData.error);
-      }
+  } else {
+    setIsLoading(false);
+    console.log(responseData.error);
+    
+    // Display the error message using toast
+    toast.error(`Login failed: ${responseData.error}`);
+  }
+  
 
     } catch (error) {
       setIsLoading(false);

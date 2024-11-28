@@ -3,7 +3,9 @@
     /* padding: 0;
     font-family: var(--Quicksand); */
   }
-  
+  .App1{
+    width: max-content;
+  }
   .q1 {
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('./pics/main.jpg');
     height: 100vh;

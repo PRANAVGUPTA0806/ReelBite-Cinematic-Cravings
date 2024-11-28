@@ -130,11 +130,18 @@ const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user.id);
 
   if (user) {
+    let role1;
+    if (user.isAdmin){
+      role1='admin'
+    }else {
+      role1='user'
+    }
     res.json({
       _id: user._id,
       username: user.username,
       email: user.email,
       imageUrl:user.imageUrl,
+      role:role1
     });
   } else {
     res.status(404);

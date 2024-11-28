@@ -46,7 +46,7 @@ const AllOrder = () => {
         <p>Payment Method</p>
         <p>UserID</p>
         <p>Email</p>
-        <p>Address/PhoneNo.</p>
+        <p>Address</p>
         <p>Order Date & Time</p>
       </div>
       <div id="listproduct-allproducts">
