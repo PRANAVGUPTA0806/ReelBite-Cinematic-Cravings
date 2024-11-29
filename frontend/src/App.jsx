@@ -29,7 +29,9 @@ const App = () => {
     <>
     <MovieContextProvider>
      
-      <div>
+      <div style={{
+        overflowX:'hidden'
+      }} >
         <Routes>
           <Route path='/' element={<Home1/>}/>
           <Route path='/home' element={<ProtectedRoute element={Home}/>}/>

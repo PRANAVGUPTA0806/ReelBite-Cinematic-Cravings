@@ -1,10 +1,12 @@
 .cFWrapper{
-    height:20vh;
+    height:max-content;
     width:100%;
     /* border:1px solid orange; */
 }
 .cFContainer{
     display:flex;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 .cFContainer button{
     

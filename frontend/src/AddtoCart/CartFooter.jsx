@@ -194,7 +194,7 @@ const CartFooter = ({ total ,cartItems}) => {
                             marginLeft: "10px",
                             marginTop: "20px"
                         }}>${formattedTotal}</span>
-                        <button style={{ width: "70px" }} onClick={handleCont}>Continue</button>
+                        <button style={{ width: "70px" ,height:"50px" }} onClick={handleCont}>Continue</button>
 
                         {formattedTotal >= "1.00" && ( // Only show PayPal buttons if the total is greater than zero
                             <PayPalButtons
@@ -223,7 +223,7 @@ const CartFooter = ({ total ,cartItems}) => {
                             />
                         )}
                          {formattedTotal >= "1.00" && ( 
-                        <button style={{ width: "70px" }} onClick={hanldeCheckout}>By Cash</button>)}
+                        <button style={{ width: "70px" ,height:"50px" }} onClick={hanldeCheckout}>By Cash</button>)}
                     </div>
                 </div>
             </PayPalScriptProvider>

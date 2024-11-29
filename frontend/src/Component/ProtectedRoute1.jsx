@@ -1,6 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import "./Loader.css";
+import pp1 from '../Home/pics/pp1.png';
 import axios from "axios";
+
+const TextTyper = () => {
+  const [typedText, setTypedText] = useState("");
+  const text = "HAPPY WATCHING!!!";
+
+  useEffect(() => {
+    let i = 0;
+    const intervalId = setInterval(() => {
+      setTypedText(text.substring(0, i + 1));
+      i++;
+      if (i > text.length) {
+        clearInterval(intervalId);
+      }
+    }, 100); // adjust the speed to your needs
+  }, [text]);
+
+  return <span>{typedText}</span>;
+};
 
 const ProtectedRoute1 = ({ element: Component }) => {
   const [userDetails, setUserDetails] = useState(null);
@@ -31,24 +51,19 @@ const ProtectedRoute1 = ({ element: Component }) => {
   }, [location]);
 
   if (loading) {
-    return <>
-    <style>
-      {`
-        .loadf {
-          background-color: #282929;
-          max-width: 100vw;
-          color: aliceblue;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
-          font-size: 1.5rem;
-        }
-      `}
-    </style>
-    <div className="loadf">Loading .......</div>
-  </>// Show a loading state while checking authentication
-  }
+    return (
+      <div className="loader-container">
+        <div className="logo-container">
+          <img
+            src={pp1}
+            alt="Company Logo"
+          />
+        </div>
+        <div className="text-container">
+          <TextTyper />
+        </div>
+      </div>
+    );}
 
   // If userDetails is not set, redirect to login
   if (!userDetails) {
